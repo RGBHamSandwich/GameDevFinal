@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Outdoors_15_0: 4254259583926183086
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Nokia mockup_0: 797961130050626157
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -397,7 +397,18 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      OutdoorsTileset_0: -7118960671607327013
+      OutdoorsTileset_1: 8035129147308563379
+      OutdoorsTileset_10: -6140848552617221578
+      OutdoorsTileset_2: 556557597060213164
+      OutdoorsTileset_3: 6131808816137748867
+      OutdoorsTileset_4: -6576439909379631116
+      OutdoorsTileset_5: 3908259557488368612
+      OutdoorsTileset_6: 1736385153337762370
+      OutdoorsTileset_7: 8195757891868510023
+      OutdoorsTileset_8: -3831324329755408762
+      OutdoorsTileset_9: 1920871874592615650
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
