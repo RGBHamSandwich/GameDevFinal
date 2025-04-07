@@ -8,7 +8,7 @@ public class BallController : MonoBehaviour
     public float walkSpeed = 2f;  
     // could i use the "find" functionality to locate these in the scene instead of 
     // assigning it in unity??
-    public ScoreCounter _scoreCounter;
+    public LevelStatManager levelStatManager;
     
     ///// PRIVATE VARIABLES /////
     private Rigidbody2D rb2d;
@@ -119,7 +119,7 @@ public class BallController : MonoBehaviour
     public void HitByClub(Vector2 angle, float force)
     {
         rb2d.AddForce(angle * force * 10);   
-        _scoreCounter?.AddStroke();
+        levelStatManager?.AddStroke();
     }
 
 }

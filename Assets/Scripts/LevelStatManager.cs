@@ -2,20 +2,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ScoreCounter : MonoBehaviour
+public class LevelStatManager : MonoBehaviour
 {
     /// PUBLIC ///
     public TextMeshProUGUI StrokeCounter;
     public TextMeshProUGUI StrokeToBeat;
+    public TextMeshProUGUI LevelCounter;
     public BallEnvironmentInteractionScript Ball;
     public int strokes = 0;
     public int strokesToBeat = 50;
+    public int level = 0;
     
     /// METHODS ///
     void Start()
     {
         StrokeCounter.text = "Stroke " + strokes.ToString();
         StrokeToBeat.text = "To Beat: " + strokesToBeat.ToString();
+        LevelCounter.text = "Level: " + level.ToString();
     }
 
     void Update()
@@ -47,5 +50,17 @@ public class ScoreCounter : MonoBehaviour
     {
         strokesToBeat = strokes;
         StrokeToBeat.text = "To Beat: " + strokesToBeat.ToString();
+    }
+
+    public void AddLevel()
+    {
+        level++;
+        LevelCounter.text = "Level: " + level.ToString();
+
+        if(level > 8)           ///////////// INSERT MAX LEVEL
+        {
+            // prompt the UIManager to show the "you win!" scene
+            SetStrokesToBeat();
+        }
     }
 }

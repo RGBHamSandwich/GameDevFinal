@@ -5,7 +5,7 @@ public class BallEnvironmentInteractionScript : MonoBehaviour
     ///// PUBLIC VARIABLES /////
     public float force = 20f;
     public float walkSpeed = 2f;
-    public ScoreCounter _scoreCounter;
+    public LevelStatManager levelStatManager;
     public Rigidbody2D rb2d;
     public float linearDamping = 0f;
 
@@ -95,15 +95,20 @@ public class BallEnvironmentInteractionScript : MonoBehaviour
     
     }
 
+    ///// put the hole interactions in their own script !!!!!!!
     public void OnHitHole()
     {
         ResetBall();
         EOnBallInHole?.Invoke();
-
-        // cue level complete popup or something
+        levelStatManager.level++;
+        // cue level complete popup or something, update level in a coroutine???
 
         // stop hit animation
     }
+
+    // public Coroutine NewLevelCoroutine()
+    // {
+    // }
 
     public void OnHitSand()
     {
