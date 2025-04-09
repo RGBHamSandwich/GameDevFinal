@@ -114,6 +114,19 @@ public class BallController : MonoBehaviour
             _canHitBall = false;
             StartCoroutine(_canHitBallCoroutine()); 
         }
+
+        // on click, get mouse position
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 direction = (mousePos - (Vector2)this.transform.position).normalized;
+            HitByClub(direction, force);
+            EOnBallHit?.Invoke();
+
+            _canHitBall = false;
+            StartCoroutine(_canHitBallCoroutine()); 
+        }
+
     }
 
     public void HitByClub(Vector2 angle, float force)
