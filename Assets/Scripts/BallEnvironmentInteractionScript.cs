@@ -57,12 +57,14 @@ public class BallEnvironmentInteractionScript : MonoBehaviour
     ////// BALL IS NOT REFLECTING
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Wall"))
-        {
-            ContactPoint2D contact = collision.contacts[0];
-            Debug.Log("Hit wall at: " + contact.point);
-            OnHitWall(contact);
-        }
+        // replacing wall logic with Unity's physicsmaterial
+        
+        // if (collision.collider.CompareTag("Wall"))
+        // {
+        //     ContactPoint2D contact = collision.contacts[0];
+        //     Debug.Log("Hit wall at: " + contact.point);
+        //     OnHitWall(contact);
+        // }
     }
 
     public void ResetBall()
