@@ -102,7 +102,7 @@ public class BallEnvironmentInteractionScript : MonoBehaviour
     {
         ResetBall();
         EOnBallInHole?.Invoke();
-        levelStatManager.level++;
+        levelStatManager?.AddLevel();
         // cue level complete popup or something, update level in a coroutine???
 
         // stop hit animation
