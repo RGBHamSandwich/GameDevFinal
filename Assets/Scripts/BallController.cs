@@ -118,6 +118,13 @@ public class BallController : MonoBehaviour
         // on click, get mouse position
         if (Input.GetMouseButtonDown(0))
         {
+            // Debug.Log("Mouse down");
+            
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            // Debug.Log("Mouse up");
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = (mousePos - (Vector2)this.transform.position).normalized;
             HitByClub(direction, force);
