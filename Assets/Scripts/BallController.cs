@@ -12,6 +12,7 @@ public class BallController : MonoBehaviour
     
     ///// PRIVATE VARIABLES /////
     private Rigidbody2D rb2d;
+    private SpriteRenderer _ballSpriteRenderer;
     private bool _canHitBall = true;
     // private BallAnimationController _ballAnimationController;
     private Transform _playerTransform;
@@ -21,11 +22,16 @@ public class BallController : MonoBehaviour
     public static event BallHit EOnBallHit;
     public delegate void BallStop();
     public static event BallStop EOnBallStop;
+    public delegate void PlayerSwing();
+    public static event PlayerSwing EOnPlayerSwing;
+    public delegate void PlayerIdle();
+    public static event PlayerIdle EOnPlayerIdle;
 
     ///// METHODS /////
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        _ballSpriteRenderer = GetComponent<SpriteRenderer>();
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         
     }
@@ -33,9 +39,7 @@ public class BallController : MonoBehaviour
     {     
         if(_canHitBall)
         {
-            HandleHit();
-            // MORE MAGNITUDE = LESS SPEED
-            // _ballAnimationController.BallSpeed = 1 - rb2d.linearVelocity.magnitude;
+            StartCoroutine(HandleHitCoroutine());
         }
 
         if(rb2d.linearVelocity.magnitude >= 0.1f)
@@ -57,8 +61,6 @@ public class BallController : MonoBehaviour
         rb2d.angularVelocity = 0f;
         
         EOnBallStop?.Invoke();
-        _canHitBall = true;
-
         StartCoroutine(_movePlayerCoroutine());
     }
 
@@ -73,10 +75,16 @@ public class BallController : MonoBehaviour
             _playerTransform.position = Vector2.MoveTowards(current, target, walkSpeed * Time.deltaTime);
             yield return null;
         }
+
         _playerTransform.position = Vector2.MoveTowards(current, target, walkSpeed * Time.deltaTime);
+        EOnPlayerIdle?.Invoke();
+
+        // once the players stops moving, they can hit the ball again
+        _canHitBall = true;
+
     }
 
-    public void HandleHit()
+    private IEnumerator HandleHitCoroutine()
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -119,20 +127,34 @@ public class BallController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             // Debug.Log("Mouse down");
-            
         }
 
         if (Input.GetMouseButtonUp(0))
         {
             // Debug.Log("Mouse up");
+            _canHitBall = false;
+            
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = (mousePos - (Vector2)this.transform.position).normalized;
+            
+            if (direction.x < 0)
+            {
+                _ballSpriteRenderer.flipX = true;
+            }
+            else if (direction.x > 0)
+            {
+                _ballSpriteRenderer.flipX = false;
+            }
+
+            EOnPlayerSwing?.Invoke();
+            yield return new WaitForSeconds(1f);
+
             HitByClub(direction, force);
             EOnBallHit?.Invoke();
-
-            _canHitBall = false;
             StartCoroutine(_canHitBallCoroutine()); 
         }
+
+        yield return null;
 
     }
 
