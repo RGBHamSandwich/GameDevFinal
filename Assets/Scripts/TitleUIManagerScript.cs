@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TitleUIManagerScript : MonoBehaviour
 {
-    public BallNextLevelScript ballNextLevelScript;
+    public NextLevelScript nextLevelScript;
     void Start()
     {
     }
@@ -17,7 +17,7 @@ public class TitleUIManagerScript : MonoBehaviour
     {
         // switch to the first level scene!
         Debug.Log("Start Button Pressed");
-        ballNextLevelScript.BallNextLevel(1);   
+        nextLevelScript.cueNextLevel(1);   
     }
 
     public void MenuButton()

@@ -11544,6 +11544,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6170038390107393215, guid: ce51b0e303d980143a395c6ee129a3db, type: 3}
+      propertyPath: ballController
+      value: 
+      objectReference: {fileID: 2012628618}
     - target: {fileID: 7712790838460884044, guid: ce51b0e303d980143a395c6ee129a3db, type: 3}
       propertyPath: m_Name
       value: Player
@@ -11558,6 +11562,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4956612638986499784, guid: ce51b0e303d980143a395c6ee129a3db, type: 3}
   m_PrefabInstance: {fileID: 366905921}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &366905923 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6170038390107393215, guid: ce51b0e303d980143a395c6ee129a3db, type: 3}
+  m_PrefabInstance: {fileID: 366905921}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1790f1f753615247980bb93266c0cad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &407788996
 GameObject:
   m_ObjectHideFlags: 0
@@ -13475,6 +13490,10 @@ PrefabInstance:
       propertyPath: levelStatManager
       value: 
       objectReference: {fileID: 1630769719}
+    - target: {fileID: -7208986316232753522, guid: 5a551aa31bac4d449909bb427ba71462, type: 3}
+      propertyPath: playerMovementController
+      value: 
+      objectReference: {fileID: 366905923}
     - target: {fileID: 3826828510318594538, guid: 5a551aa31bac4d449909bb427ba71462, type: 3}
       propertyPath: m_Name
       value: Ball
@@ -13557,6 +13576,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 88b9b51df910f1f4399adb7d18959391, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2012628618 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -7208986316232753522, guid: 5a551aa31bac4d449909bb427ba71462, type: 3}
+  m_PrefabInstance: {fileID: 2012628614}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 673a35cbbc85c1143866988bd146a478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2128010026
@@ -13650,8 +13680,8 @@ SpriteRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1601458521}
   - {fileID: 342342751}
-  - {fileID: 195160194}
+  - {fileID: 1601458521}
   - {fileID: 995195057}
+  - {fileID: 195160194}
   - {fileID: 45168729}

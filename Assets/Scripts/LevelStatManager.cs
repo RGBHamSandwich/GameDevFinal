@@ -8,7 +8,7 @@ public class LevelStatManager : MonoBehaviour
     public TextMeshProUGUI StrokeCounter;
     public TextMeshProUGUI StrokeToBeat;
     public TextMeshProUGUI LevelCounter;
-    public BallNextLevelScript ballNextLevelScript;
+    public NextLevelScript nextLevelScript;
     public BallEnvironmentInteractionScript Ball;
     public int strokes = 0;
     public int strokesToBeat = 50;
@@ -64,7 +64,7 @@ public class LevelStatManager : MonoBehaviour
             SetStrokesToBeat();
         }
 
-        ballNextLevelScript.BallNextLevel(level);   
+        nextLevelScript.cueNextLevel(level);   
 
     }
 }

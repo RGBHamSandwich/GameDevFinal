@@ -11,14 +11,14 @@ public class PlayerAnimationController : MonoBehaviour
 
         BallController.EOnPlayerSwing += TriggerSwing;
         BallController.EOnBallStop += TriggerWalk;
-        BallController.EOnPlayerIdle += TriggerIdle;
+        PlayerMovementController.EOnPlayerIdle += TriggerIdle;
     }
 
     void OnDestroy()
     {
         BallController.EOnPlayerSwing += TriggerSwing;
         BallController.EOnBallStop -= TriggerWalk;
-        BallController.EOnPlayerIdle -= TriggerIdle;
+        PlayerMovementController.EOnPlayerIdle -= TriggerIdle;
     }
 
     void Update()

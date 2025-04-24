@@ -5,17 +5,14 @@ public class BallController : MonoBehaviour
 {
     ///// PUBLIC VARIABLES /////
     public float force = 20f;  
-    public float walkSpeed = 2f;  
-    // could i use the "find" functionality to locate these in the scene instead of 
-    // assigning it in unity??
     public LevelStatManager levelStatManager;
+    public PlayerMovementController playerMovementController;
     
     ///// PRIVATE VARIABLES /////
     private Rigidbody2D rb2d;
     private SpriteRenderer _ballSpriteRenderer;
     private bool _canHitBall = true;
-    // private BallAnimationController _ballAnimationController;
-    private Transform _playerTransform;
+    private float holdDownMouseTime = 0f;
 
     ///// ANIMATION /////
     public delegate void BallHit();
@@ -24,16 +21,12 @@ public class BallController : MonoBehaviour
     public static event BallStop EOnBallStop;
     public delegate void PlayerSwing();
     public static event PlayerSwing EOnPlayerSwing;
-    public delegate void PlayerIdle();
-    public static event PlayerIdle EOnPlayerIdle;
 
     ///// METHODS /////
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        _ballSpriteRenderer = GetComponent<SpriteRenderer>();
-        _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        
+        _ballSpriteRenderer = GetComponent<SpriteRenderer>();        
     }
     void Update()
     {     
@@ -46,6 +39,11 @@ public class BallController : MonoBehaviour
         {
             rb2d.linearVelocity *= 0.99f;
         }
+    }
+
+    public void ChangeCanHitBall()
+    {
+        _canHitBall = true;
     }
 
     private IEnumerator _canHitBallCoroutine()
@@ -61,101 +59,55 @@ public class BallController : MonoBehaviour
         rb2d.angularVelocity = 0f;
         
         EOnBallStop?.Invoke();
-        StartCoroutine(_movePlayerCoroutine());
-    }
-
-    private IEnumerator _movePlayerCoroutine()
-    {
-        Vector2 target = this.transform.position;
-        Vector2 current = _playerTransform.position;
-
-        while (Vector2.Distance(current, target) > 0.5f)
-        {
-            current = _playerTransform.position;
-            _playerTransform.position = Vector2.MoveTowards(current, target, walkSpeed * Time.deltaTime);
-            yield return null;
-        }
-
-        _playerTransform.position = Vector2.MoveTowards(current, target, walkSpeed * Time.deltaTime);
-        EOnPlayerIdle?.Invoke();
-
-        // once the players stops moving, they can hit the ball again
-        _canHitBall = true;
-
+        playerMovementController.MovePlayer();
     }
 
     private IEnumerator HandleHitCoroutine()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            // Debug.Log("W pressed");
-            HitByClub(new Vector2(0, 1), force);
-            EOnBallHit?.Invoke();
+        yield return null;
 
-            _canHitBall = false;
-            StartCoroutine(_canHitBallCoroutine());   
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            // Debug.Log("A pressed");
-            HitByClub(new Vector2(-1, 0), force);
-            EOnBallHit?.Invoke();
-
-            _canHitBall = false;
-            StartCoroutine(_canHitBallCoroutine()); 
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            // Debug.Log("S pressed");
-            HitByClub(new Vector2(0, -1), force);
-            EOnBallHit?.Invoke();
-
-            _canHitBall = false;
-            StartCoroutine(_canHitBallCoroutine()); 
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            // Debug.Log("D pressed");
-            HitByClub(new Vector2(1, 0), force);
-            EOnBallHit?.Invoke();
-
-            _canHitBall = false;
-            StartCoroutine(_canHitBallCoroutine()); 
-        }
-
-        // on click, get mouse position
-        if (Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0))            // true on click down
         {
             // Debug.Log("Mouse down");
+            holdDownMouseTime = Time.time;
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if(Input.GetMouseButtonUp(0))              // true on click up
         {
-            // Debug.Log("Mouse up");
             _canHitBall = false;
-            
+
+            // Debug.Log("Mouse up");
+            holdDownMouseTime = Time.time - holdDownMouseTime;
+
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = (mousePos - (Vector2)this.transform.position).normalized;
-            
-            if (direction.x < 0)
-            {
-                _ballSpriteRenderer.flipX = true;
-            }
-            else if (direction.x > 0)
-            {
-                _ballSpriteRenderer.flipX = false;
-            }
 
             EOnPlayerSwing?.Invoke();
             yield return new WaitForSeconds(1f);
 
-            HitByClub(direction, force);
+            HitByClub(direction, CalculateForce(holdDownMouseTime));
             EOnBallHit?.Invoke();
             StartCoroutine(_canHitBallCoroutine()); 
         }
 
-        yield return null;
+        if(Input.GetMouseButton(0))                 // true while holding down
+        {
+            // Debug.Log("Mouse held down");
+            holdDownMouseTime = Time.time - holdDownMouseTime;
+            ShowForce(CalculateForce(holdDownMouseTime));
+        }
 
+    }
+
+    public float CalculateForce(float time)
+    {
+        float result = (Mathf.Sin(time) + 1) * force;
+        return result;
+    }
+
+    public void ShowForce(float time)
+    {
+        
     }
 
     public void HitByClub(Vector2 angle, float force)
