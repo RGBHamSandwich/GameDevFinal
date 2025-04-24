@@ -16,7 +16,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     void OnDestroy()
     {
-        BallController.EOnPlayerSwing += TriggerSwing;
+        BallController.EOnPlayerSwing -= TriggerSwing;
         BallController.EOnBallStop -= TriggerWalk;
         PlayerMovementController.EOnPlayerIdle -= TriggerIdle;
     }
