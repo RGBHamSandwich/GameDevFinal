@@ -4,7 +4,7 @@ using UnityEngine;
 public class BallController : MonoBehaviour
 {
     ///// PUBLIC VARIABLES /////
-    public float force = 20f;  
+    public float force = 30f;  
     public LevelStatManager levelStatManager;
     public PlayerMovementController playerMovementController;
     
@@ -107,12 +107,12 @@ public class BallController : MonoBehaviour
 
     public void ShowForce(float time)
     {
-        
+        // halp
     }
 
-    public void HitByClub(Vector2 angle, float force)
+    public void HitByClub(Vector2 angle, float thisForce)
     {
-        rb2d.AddForce(angle * force * 10);   
+        rb2d.AddForce(angle * thisForce * 10f);   
         levelStatManager?.AddStroke();
     }
 
