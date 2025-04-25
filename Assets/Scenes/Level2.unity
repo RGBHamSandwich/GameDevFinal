@@ -11970,6 +11970,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2080389158}
     - target: {fileID: -2772430490017233084, guid: cb86a77726b513a4dacad654b4188daa, type: 3}
+      propertyPath: nextLevelScript
+      value: 
+      objectReference: {fileID: 1260573974}
+    - target: {fileID: -2772430490017233084, guid: cb86a77726b513a4dacad654b4188daa, type: 3}
       propertyPath: ballNextLevelScript
       value: 
       objectReference: {fileID: 1260573974}
