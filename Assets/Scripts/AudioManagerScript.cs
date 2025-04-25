@@ -5,14 +5,20 @@ public class AudioManagerScript : MonoBehaviour
 {
     
     ///// PUBLIC VARIABLES /////
+    [Header("Audio Sources")]
     public AudioSource musicSource;
     public float musicVolume = 0.3f;
     public AudioSource sfxSource;
+    public float sfxVolume = 0.5f;
     [Header("Audio Clips")]
     public AudioClip titleMusic;
     public AudioClip levelMusic;
     public AudioClip hitSound;
-    // etc...
+    public AudioClip holeSound;
+    public AudioClip sandSound;
+    public AudioClip waterSound;
+    public AudioClip wallSound;     // wall sound? or just use Unity's physics material?
+    public AudioClip brotherHitSound;
     public static AudioManagerScript instance;
 
     private void Awake()
@@ -53,7 +59,38 @@ public class AudioManagerScript : MonoBehaviour
 
     public void PlayHitSound()
     {
-        sfxSource.PlayOneShot(hitSound, 1f);
+        sfxSource.PlayOneShot(hitSound, sfxVolume);
         Debug.Log("Hit sound played!");
     }
+
+    public void PlayHoleSound()
+    {
+        sfxSource.PlayOneShot(holeSound, sfxVolume);
+        Debug.Log("Hole sound played!");
+    }
+
+    public void PlaySandSound()
+    {
+        sfxSource.PlayOneShot(sandSound, sfxVolume);
+        Debug.Log("Sand sound played!");
+    }
+
+    public void PlayWaterSound()
+    {
+        sfxSource.PlayOneShot(waterSound, sfxVolume);
+        Debug.Log("Water sound played!");
+    }
+
+    public void PlayWallSound()
+    {
+        sfxSource.PlayOneShot(wallSound, sfxVolume);
+        Debug.Log("Wall sound played!");
+    }
+
+    public void PlayBrotherHitSound()
+    {
+        sfxSource.PlayOneShot(brotherHitSound, sfxVolume);
+        Debug.Log("Brother hit sound played!");
+    }
+
 }

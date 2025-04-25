@@ -286,6 +286,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4270672310242083538, guid: f4f8e8ff616290543ad78988a264fd7c, type: 3}
+      propertyPath: hitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: cbc34520438190048b3af03e5885a26b, type: 3}
+    - target: {fileID: 4270672310242083538, guid: f4f8e8ff616290543ad78988a264fd7c, type: 3}
       propertyPath: sfxSource
       value: 
       objectReference: {fileID: 1469118694}

@@ -114,6 +114,7 @@ public class BallController : MonoBehaviour
     {
         rb2d.AddForce(angle * thisForce * 10f);   
         levelStatManager?.AddStroke();
+        AudioManagerScript.instance.PlayHitSound();
     }
 
 }
