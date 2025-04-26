@@ -5,9 +5,12 @@ public class BallEnvironmentInteractionScript : MonoBehaviour
     ///// PUBLIC VARIABLES /////
     public float force = 20f;
     public float walkSpeed = 2f;
-    public LevelStatManager levelStatManager;
-    public Rigidbody2D rb2d;
     public float linearDamping = 0f;
+
+    ///// PRIVATE VARIABLES /////
+    private Rigidbody2D _ballRigidBody2D;
+    private LevelStatManager _levelStatManager;
+    private AudioManagerScript _audioManagerScript;
 
     ///// ANIMATION /////
     public delegate void BallStop();
@@ -17,7 +20,9 @@ public class BallEnvironmentInteractionScript : MonoBehaviour
     
     void Start()
     {
-        rb2d = GetComponent<Rigidbody2D>();
+        _ballRigidBody2D = GetComponent<Rigidbody2D>();
+        _levelStatManager = FindFirstObjectByType<LevelStatManager>();
+        _audioManagerScript = FindFirstObjectByType<AudioManagerScript>();
     }
 
     void Update()
@@ -50,45 +55,45 @@ public class BallEnvironmentInteractionScript : MonoBehaviour
         if (other.CompareTag("Sand"))
         {
             Debug.Log("Ball out of sand!");
-            rb2d.linearDamping = 0f;
+            _ballRigidBody2D.linearDamping = 0f;
         }
     }
 
-    ////// BALL IS NOT REFLECTING
     private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // replacing wall logic with Unity's physicsmaterial
-        
-        // if (collision.collider.CompareTag("Wall"))
-        // {
-        //     ContactPoint2D contact = collision.contacts[0];
-        //     Debug.Log("Hit wall at: " + contact.point);
-        //     OnHitWall(contact);
-        // }
+    {        
+        if (collision.collider.CompareTag("Wall"))
+        {
+            ContactPoint2D contact = collision.contacts[0];
+            Debug.Log("Hit wall at: " + contact.point);
+            OnHitWall(contact);
+        }
     }
 
     public void ResetBall()
     {
         EOnBallStop?.Invoke();
         transform.position = Vector3.zero;
-        rb2d.linearVelocity = Vector2.zero;
-        rb2d.angularVelocity = 0f;
-        rb2d.angularDamping = 0f;
-        rb2d.rotation = 0f;
-        rb2d.linearDamping = 0f;
+        _ballRigidBody2D.linearVelocity = Vector2.zero;
+        _ballRigidBody2D.angularVelocity = 0f;
+        _ballRigidBody2D.angularDamping = 0f;
+        _ballRigidBody2D.rotation = 0f;
+        _ballRigidBody2D.linearDamping = 0f;
     }
 
-    public void OnHitWall(ContactPoint2D contact)
+    public void OnHitWall(ContactPoint2D contact)                           ///// if i don't come back to this, remove "contact"
     {
-        rb2d.linearVelocity = Vector2.zero;
+        _audioManagerScript?.PlayBounceSound();
 
-        Vector2 wallAngle = contact.normal.normalized;
-        Vector2 ballAngle = rb2d.linearVelocity.normalized * -1f;
-        Vector2 reflected = Vector2.Reflect(ballAngle, wallAngle);
+        // replacing wall logic with Unity's physicsmaterial
+        // _ballRigidBody2D.linearVelocity = Vector2.zero;
 
-        // rb2d.linearVelocity = (reflected * ballAngle.magnitude);
-        rb2d.AddForce(reflected * 10f, ForceMode2D.Impulse);
-        Debug.Log("Reflected off wall with normal: " + wallAngle);
+        // Vector2 wallAngle = contact.normal.normalized;
+        // Vector2 ballAngle = _ballRigidBody2D.linearVelocity.normalized * -1f;
+        // Vector2 reflected = Vector2.Reflect(ballAngle, wallAngle);
+
+        // // rb2d.linearVelocity = (reflected * ballAngle.magnitude);
+        // _ballRigidBody2D.AddForce(reflected * 10f, ForceMode2D.Impulse);
+        // Debug.Log("Reflected off wall with normal: " + wallAngle);
     }
 
     public void OnOutOfBounds()
@@ -102,10 +107,11 @@ public class BallEnvironmentInteractionScript : MonoBehaviour
     {
         ResetBall();
         EOnBallInHole?.Invoke();
-        levelStatManager?.AddLevel();
+        _levelStatManager?.AddLevel();
+        _audioManagerScript?.PlayHoleSound();
+
         // cue level complete popup or something, update level in a coroutine???
 
-        // stop hit animation
     }
 
     // public Coroutine NewLevelCoroutine()
@@ -114,8 +120,10 @@ public class BallEnvironmentInteractionScript : MonoBehaviour
 
     public void OnHitSand()
     {
-        rb2d.linearDamping = 5;
-        rb2d.angularDamping = 5f;
+        _ballRigidBody2D.linearDamping = 5;
+        _ballRigidBody2D.angularDamping = 5f;
+
+        _audioManagerScript?.PlaySandSound();
 
         // cue sand popup or something
 
@@ -125,6 +133,7 @@ public class BallEnvironmentInteractionScript : MonoBehaviour
     public void OnHitWater()
     {
         ResetBall();
+        _audioManagerScript?.PlayWaterSound();
 
         // cue water popup or something
 

@@ -20,11 +20,6 @@ public class NextLevelScript : MonoBehaviour
         string LevelName = "Level" + level.ToString();
         Debug.Log("cueNextLevel prompted");
         StartCoroutine(NextLevelCoroutine(LevelName));
-
-        if(level == 1)
-        {
-            AudioManagerScript.instance.PlayLevelMusic();
-        }
     }
 
     private IEnumerator NextLevelCoroutine(String level)

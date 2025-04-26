@@ -305,7 +305,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicSource: {fileID: 6843019640864694359}
-  musicVolume: 0.3
+  musicVolume: 0.5
   sfxSource: {fileID: 2451877044724868175}
-  backgroundMusic: {fileID: 8300000, guid: efdc86bb57866f84d9751bea13a7e95c, type: 3}
-  hitSound: {fileID: 0}
+  sfxVolume: 0.5
+  titleMusic: {fileID: 8300000, guid: 84fa23af1b9b53c4683e08583e43d6ce, type: 3}
+  levelMusic: {fileID: 8300000, guid: 784d18df03bf58546b5ee1e1a7f278e1, type: 3}
+  hitSound: {fileID: 8300000, guid: c607b2c7523655d49ae03fb7b561942f, type: 3}
+  holeSound: {fileID: 8300000, guid: 55c260e68f09cc0488558f092dc91a06, type: 3}
+  sandSound: {fileID: 8300000, guid: af9443b44b428d147ab9f33e160264d7, type: 3}
+  waterSound: {fileID: 8300000, guid: 3f470a82bb3fe9242809112a60a17a3e, type: 3}
+  bounceSound: {fileID: 8300000, guid: 7ed031c369fb5424a96291a7d1117e3c, type: 3}
+  brotherHitSound: {fileID: 0}
+  startButtonSound: {fileID: 8300000, guid: 8fe85acce4979044c8daad428ef18d8b, type: 3}
+  menuButtonSound: {fileID: 8300000, guid: 48baab35c548d7d4fa2bb2de55b7f124, type: 3}
+  ClickInSound: {fileID: 8300000, guid: 209ef5303d65157429649f4b52a92e8c, type: 3}
+  ClickOutSound: {fileID: 8300000, guid: cc81e0704bf8f674f95245413498ae9c, type: 3}

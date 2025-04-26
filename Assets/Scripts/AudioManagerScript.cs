@@ -9,16 +9,22 @@ public class AudioManagerScript : MonoBehaviour
     public AudioSource musicSource;
     public float musicVolume = 0.3f;
     public AudioSource sfxSource;
-    public float sfxVolume = 0.5f;
-    [Header("Audio Clips")]
+    public float sfxVolume = 0.1f;
+    [Header("Themes")]
     public AudioClip titleMusic;
     public AudioClip levelMusic;
+    [Header("Gameplay SFX")]
     public AudioClip hitSound;
     public AudioClip holeSound;
     public AudioClip sandSound;
     public AudioClip waterSound;
-    public AudioClip wallSound;     // wall sound? or just use Unity's physics material?
+    public AudioClip bounceSound;     // wall sound? or just use Unity's physics material?
     public AudioClip brotherHitSound;
+    [Header("UI SFX")]
+    public AudioClip startButtonSound;
+    public AudioClip menuButtonSound;
+    public AudioClip ClickInSound;
+    public AudioClip ClickOutSound;
     public static AudioManagerScript instance;
 
     private void Awake()
@@ -44,7 +50,8 @@ public class AudioManagerScript : MonoBehaviour
 
     void Update()
     {
-        
+        musicSource.volume = musicVolume;
+        sfxSource.volume = sfxVolume;
     }
 
     public void PlayLevelMusic()
@@ -53,10 +60,11 @@ public class AudioManagerScript : MonoBehaviour
         musicSource.clip = levelMusic;
         musicSource.loop = true;
         musicSource.volume = musicVolume;
-        musicSource.PlayDelayed(0.5f); // delay heheh
+        musicSource.PlayDelayed(3f); // delay for button sfx heheh
         Debug.Log("Level music played!");
     }
 
+    ////// GAMEPLAY SOUNDS //////
     public void PlayHitSound()
     {
         sfxSource.PlayOneShot(hitSound, sfxVolume);
@@ -71,19 +79,19 @@ public class AudioManagerScript : MonoBehaviour
 
     public void PlaySandSound()
     {
-        sfxSource.PlayOneShot(sandSound, sfxVolume);
+        sfxSource.PlayOneShot(sandSound, sfxVolume / 2);
         Debug.Log("Sand sound played!");
     }
 
     public void PlayWaterSound()
     {
-        sfxSource.PlayOneShot(waterSound, sfxVolume);
+        sfxSource.PlayOneShot(waterSound, sfxVolume / 3);
         Debug.Log("Water sound played!");
     }
 
-    public void PlayWallSound()
+    public void PlayBounceSound()
     {
-        sfxSource.PlayOneShot(wallSound, sfxVolume);
+        sfxSource.PlayOneShot(bounceSound, sfxVolume);
         Debug.Log("Wall sound played!");
     }
 
@@ -91,6 +99,31 @@ public class AudioManagerScript : MonoBehaviour
     {
         sfxSource.PlayOneShot(brotherHitSound, sfxVolume);
         Debug.Log("Brother hit sound played!");
+    }
+
+    ////// UI SOUNDS //////
+    public void PlayStartButtonSound()
+    {
+        sfxSource.PlayOneShot(startButtonSound, sfxVolume * 2f);
+        Debug.Log("Start button sound played!");
+    }
+
+    public void PlayMenuButtonSound()
+    {
+        sfxSource.PlayOneShot(menuButtonSound, sfxVolume * 2f);
+        Debug.Log("Menu button sound played!");
+    }
+
+    public void PlayClickInSound()
+    {
+        sfxSource.PlayOneShot(ClickInSound, sfxVolume);
+        Debug.Log("Click in sound played!");
+    }
+
+    public void PlayClickOutSound()
+    {
+        sfxSource.PlayOneShot(ClickOutSound, sfxVolume);
+        Debug.Log("Click out sound played!");
     }
 
 }
