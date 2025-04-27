@@ -74,14 +74,26 @@ public class BallController : MonoBehaviour
 
         if(Input.GetMouseButtonUp(0))              // true on click up
         {
-            _canHitBall = false;
-
             // Debug.Log("Mouse up");
             holdDownMouseTime = Time.time - holdDownMouseTime;
 
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 direction = (mousePos - (Vector2)this.transform.position).normalized;
+            Vector2 screenMousePos = Input.mousePosition;
+            Debug.Log("Screen click position: " + screenMousePos);
+            if (screenMousePos.x < 0 || screenMousePos.x > Screen.width || screenMousePos.y < 0 || screenMousePos.y > Screen.height)
+            {
+                // Debug.Log("Mouse position out of bounds: " + screenMousePos);
+                yield break;
+            }
+            else if (screenMousePos.y > 505f)
+            {
+                Debug.Log("Mouse on menu bar");
+                yield break;
+            }
 
+            Vector2 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            // Debug.Log("World click position: " + worldMousePos);
+            Vector2 direction = (worldMousePos - (Vector2)this.transform.position).normalized;
+            _canHitBall = false;
             EOnPlayerSwing?.Invoke();
             yield return new WaitForSeconds(1f);
 

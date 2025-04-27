@@ -242,11 +242,33 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: exitMButton
+      name: noButton
       rect:
         serializedVersion: 2
         x: 16
         y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01201ca68c1825647a482a5f9f31003a
+      internalID: 1778441578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yesButton
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -257,8 +279,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01201ca68c1825647a482a5f9f31003a
-      internalID: 1778441578
+      spriteID: a8d7c4dba8bf25640a58eb59ed717f05
+      internalID: -72978058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: exitMenuButton
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79513cb72da0e1b4b86502c5bff510c0
+      internalID: -1224655571
       vertices: []
       indices: 
       edges: []
@@ -280,10 +324,12 @@ TextureImporter:
       SFXOffButton: -3906963
       SFXOnButton: 800356945
       exitButton: -1905343405
-      exitMButton: 1778441578
+      exitMenuButton: -1224655571
       musicOffButton: -1557955179
       musicOnButton: -701600161
+      noButton: 1778441578
       settingsButton: 1253371453
+      yesButton: -72978058
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

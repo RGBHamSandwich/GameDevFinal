@@ -8,8 +8,10 @@ public class AudioManagerScript : MonoBehaviour
     [Header("Audio Sources")]
     public AudioSource musicSource;
     public float musicVolume = 0.3f;
+    public bool musicMuted = false;
     public AudioSource sfxSource;
     public float sfxVolume = 0.1f;
+    public bool sfxMuted = false;
     [Header("Themes")]
     public AudioClip titleMusic;
     public AudioClip levelMusic;
@@ -50,8 +52,23 @@ public class AudioManagerScript : MonoBehaviour
 
     void Update()
     {
-        musicSource.volume = musicVolume;
-        sfxSource.volume = sfxVolume;
+        if(musicMuted)
+        {
+            musicSource.volume = 0f;
+        }
+        else
+        {
+            musicSource.volume = musicVolume;
+        }
+        
+        if(sfxMuted)
+        {
+            sfxSource.volume = 0f;
+        }
+        else
+        {
+            sfxSource.volume = sfxVolume;
+        }
     }
 
     public void PlayLevelMusic()
@@ -62,6 +79,29 @@ public class AudioManagerScript : MonoBehaviour
         musicSource.volume = musicVolume;
         musicSource.PlayDelayed(3f); // delay for button sfx heheh
         Debug.Log("Level music played!");
+    }
+
+    public void ToggleMusicVolumeOff()
+    {
+        musicMuted = true;
+        Debug.Log("Music volume toggled!");
+    }
+    public void ToggleMusicVolumeOn()
+    {
+        musicMuted = false;
+        Debug.Log("Music volume toggled!");
+    }
+
+    public void ToggleSFXVolumeOff()
+    {
+        sfxMuted = true;
+        Debug.Log("SFX volume toggled!");
+    }
+
+    public void ToggleSFXVolumeOn()
+    {
+        sfxMuted = false;
+        Debug.Log("SFX volume toggled!");
     }
 
     ////// GAMEPLAY SOUNDS //////
