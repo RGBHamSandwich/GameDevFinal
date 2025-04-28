@@ -6,17 +6,17 @@ using TMPro;
 public class LevelStatManager : MonoBehaviour
 {
     ///// PUBLIC VARIABLES /////
-    [Header("UI Elements")]
-    private TextMeshProUGUI StrokeCounter;
-    private TextMeshProUGUI StrokeToBeat;
-    private TextMeshProUGUI LevelCounter;
     [Header("Level Stats")]
+    public int numberOfLevels = 1;
     public int strokes = 0;
     public int strokesToBeat = 20;
     public int level = 0;
     public static LevelStatManager instance;
     
     ///// PRIVATE VARIABLES /////    
+    private TextMeshProUGUI StrokeCounter;
+    private TextMeshProUGUI StrokeToBeat;
+    private TextMeshProUGUI LevelCounter;
     private BallEnvironmentInteractionScript _ball;
 
     ///// ANIMATION /////
@@ -59,9 +59,15 @@ public class LevelStatManager : MonoBehaviour
         
         _ball = FindFirstObjectByType<BallEnvironmentInteractionScript>();
         _ball?.ResetBall();
-        // FindLevelText();
         yield return null;
     } 
+
+    ///// GIVEN METHODS /////
+    public void OnDestroy()
+    {
+        PlayerPrefs.SetInt ("strokesToBeat", strokesToBeat);
+        PlayerPrefs.Save();
+    }
 
     ///// ~ fancy ~  METHODS /////   
     public void StartGame()
@@ -73,10 +79,33 @@ public class LevelStatManager : MonoBehaviour
         FindLevelText();
     }
 
-    public void cueNextLevel(int level)
+    public void cueNextLevel()
     {
-        if (level <= 0)
+        if(level == 0)
         {
+            // we're on the title screen, so we don't want to increment the level
+            // to start the game, the Start Button accesses StartGame() directly
+            return;
+        }
+
+        level++;
+        LevelCounter.text = "Level: " + level.ToString();
+
+        if(level > numberOfLevels)
+        {
+            if(strokes <= strokesToBeat)
+            {
+                // prompt the UIManager to show the "you win!" scene                                // create an OnWin method
+                SetStrokesToBeat(); 
+            }
+            StartCoroutine(NextLevelCoroutine("TitleScene"));   // reset the game
+            ResetText();
+            return;
+        }   
+
+        if (level < 0)
+        {
+            level = 0;
             StartCoroutine(NextLevelCoroutine("TitleScene"));   // reset the game
             return;
         }
@@ -132,41 +161,25 @@ public class LevelStatManager : MonoBehaviour
     public void TooManyStrokes()
     {
         // implement screen of failure
-        ResetStrokes();
-        cueNextLevel(0);
+        cueNextLevel();
+        ResetText();
         EOnPlayerCry?.Invoke();
     }
 
-    public void ResetStrokes()
+    public void ResetText()
     {
         strokes = 0;
         StrokeCounter.text = "Stroke " + strokes.ToString();
+
+        level = 0;
+        LevelCounter.text = "Level: " + level.ToString();
+
+        FindLevelText();
     }
 
     public void SetStrokesToBeat()
     {
-        // implement setting a new low score !!
         strokesToBeat = strokes;
         StrokeToBeat.text = "To Beat: " + strokesToBeat.ToString();
-    }
-
-    public void AddLevel()
-    {
-        if(level == 0)
-        {
-            // we're on the title screen, so we don't want to increment the level
-            return;
-        }
-
-        level++;
-        LevelCounter.text = "Level: " + level.ToString();
-
-        if(level > 4) // max level
-        {
-            // prompt the UIManager to show the "you win!" scene
-            SetStrokesToBeat();
-            return;
-        }
-        cueNextLevel(level);   
     }
 }

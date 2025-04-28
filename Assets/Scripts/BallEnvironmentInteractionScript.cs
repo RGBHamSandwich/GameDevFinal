@@ -88,7 +88,7 @@ public class BallEnvironmentInteractionScript : MonoBehaviour
     {
         ResetBall();
         EOnBallInHole?.Invoke();
-        _levelStatManager?.AddLevel();
+        _levelStatManager?.cueNextLevel();
         _audioManagerScript?.PlayHoleSound();
 
         // cue level complete popup !
