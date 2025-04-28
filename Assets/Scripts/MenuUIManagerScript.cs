@@ -2,17 +2,22 @@ using UnityEngine;
 
 public class MenuUIManagerScript : MonoBehaviour
 {
+    ///// PRIVATE VARIABLES /////
     private AudioManagerScript _audioManagerScript;
+    private BallController _ballControllerScript;
+
+    ///// GIVEN METHODS /////
     void Start()
     {
         _audioManagerScript = FindFirstObjectByType<AudioManagerScript>();
+        _ballControllerScript = FindFirstObjectByType<BallController>();
     }
 
     void Update()
-    {
-        
+    { 
     }
 
+    ///// MENU BUTTONS /////
     public void ExitButton()
     {
         Debug.Log("Exit Button Pressed");
@@ -37,18 +42,20 @@ public class MenuUIManagerScript : MonoBehaviour
     public void SettingsButton()
     {
         Debug.Log("Settings Button Pressed");
-        // open the settings menu
         _audioManagerScript?.PlayClickInSound();
+        _ballControllerScript?.FalseCanHitBall();
+        // open the settings menu
     }
-
 
     public void SettingsCloseButton()
     {
         Debug.Log("Settings Close Button Pressed");
         // close the settings menu
+        _ballControllerScript?.TrueCanHitBall();
         _audioManagerScript?.PlayClickOutSound();    
     }
 
+    ///// SOUND BUTTONS /////
     public void MusicOffButton()
     {
         Debug.Log("Music Off Button Pressed");

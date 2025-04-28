@@ -1,9 +1,7 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AudioManagerScript : MonoBehaviour
 {
-    
     ///// PUBLIC VARIABLES /////
     [Header("Audio Sources")]
     public AudioSource musicSource;
@@ -29,6 +27,7 @@ public class AudioManagerScript : MonoBehaviour
     public AudioClip ClickOutSound;
     public static AudioManagerScript instance;
 
+    ///// METHODS /////
     private void Awake()
     {
         if(instance == null)
@@ -77,15 +76,17 @@ public class AudioManagerScript : MonoBehaviour
         musicSource.clip = levelMusic;
         musicSource.loop = true;
         musicSource.volume = musicVolume;
-        musicSource.PlayDelayed(3f); // delay for button sfx heheh
+        musicSource.PlayDelayed(2f); // delay for button sfx to play
         Debug.Log("Level music played!");
     }
 
+    ///// TOGGLE MUSIC AND SFX VOLUME /////
     public void ToggleMusicVolumeOff()
     {
         musicMuted = true;
         Debug.Log("Music volume toggled!");
     }
+
     public void ToggleMusicVolumeOn()
     {
         musicMuted = false;
@@ -156,13 +157,13 @@ public class AudioManagerScript : MonoBehaviour
 
     public void PlayClickInSound()
     {
-        sfxSource.PlayOneShot(ClickInSound, sfxVolume);
+        sfxSource.PlayOneShot(ClickInSound, sfxVolume * 2f);
         Debug.Log("Click in sound played!");
     }
 
     public void PlayClickOutSound()
     {
-        sfxSource.PlayOneShot(ClickOutSound, sfxVolume);
+        sfxSource.PlayOneShot(ClickOutSound, sfxVolume * 2f);
         Debug.Log("Click out sound played!");
     }
 

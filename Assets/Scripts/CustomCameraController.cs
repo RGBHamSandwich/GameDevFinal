@@ -8,17 +8,17 @@ public class CustomCameraController : MonoBehaviour
     public CinemachineCamera BallCamera;
     public CinemachineCamera LevelCamera;
 
-    ///// METHODS /////
+    ///// GIVEN METHODS /////
     void Start()
     {
         StartCoroutine(LevelToBallCameraCoroutine());    
     }
 
     void Update()
-    {
-        
+    {  
     }
 
+    ///// COROUTINES /////
     private IEnumerator LevelToBallCameraCoroutine()
     {
         yield return new WaitForSeconds(3f);
@@ -31,7 +31,8 @@ public class CustomCameraController : MonoBehaviour
         BallCamera.Priority = 1;
         LevelCamera.Priority = 0;
     }
-    private IEnumerator BallToLevelCameraCoroutine()
+
+    private IEnumerator BallToLevelCameraCoroutine()    // this coroutine is not currenty implemented, but it is here for future use
     {
         if (BallCamera == null || LevelCamera == null)
         {

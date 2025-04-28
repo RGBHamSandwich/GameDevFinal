@@ -4,13 +4,13 @@ using UnityEngine;
 public class BallController : MonoBehaviour
 {
     ///// PUBLIC VARIABLES /////
+    [Tooltip("The force applied to the ball when hit.")]
     public float force = 30f;  
-    public LevelStatManager levelStatManager;
-    public PlayerMovementController playerMovementController;
     
     ///// PRIVATE VARIABLES /////
     private Rigidbody2D rb2d;
-    private SpriteRenderer _ballSpriteRenderer;
+    private LevelStatManager _levelStatManager;
+    private PlayerMovementController _playerMovementController;
     private bool _canHitBall = true;
     private float holdDownMouseTime = 0f;
 
@@ -22,12 +22,14 @@ public class BallController : MonoBehaviour
     public delegate void PlayerSwing();
     public static event PlayerSwing EOnPlayerSwing;
 
-    ///// METHODS /////
+    ///// GIVEN METHODS /////
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        _ballSpriteRenderer = GetComponent<SpriteRenderer>();        
+        _levelStatManager = FindFirstObjectByType<LevelStatManager>();
+        _playerMovementController = FindFirstObjectByType<PlayerMovementController>();
     }
+
     void Update()
     {     
         if(_canHitBall)
@@ -41,11 +43,7 @@ public class BallController : MonoBehaviour
         }
     }
 
-    public void ChangeCanHitBall()
-    {
-        _canHitBall = true;
-    }
-
+    ///// COROUTINES /////
     private IEnumerator _canHitBallCoroutine()
     {
         yield return new WaitForSeconds(1f);
@@ -59,7 +57,7 @@ public class BallController : MonoBehaviour
         rb2d.angularVelocity = 0f;
         
         EOnBallStop?.Invoke();
-        playerMovementController.MovePlayer();
+        _playerMovementController?.MovePlayer();
     }
 
     private IEnumerator HandleHitCoroutine()
@@ -78,15 +76,15 @@ public class BallController : MonoBehaviour
             holdDownMouseTime = Time.time - holdDownMouseTime;
 
             Vector2 screenMousePos = Input.mousePosition;
-            Debug.Log("Screen click position: " + screenMousePos);
+            // Debug.Log("Screen click position: " + screenMousePos);
             if (screenMousePos.x < 0 || screenMousePos.x > Screen.width || screenMousePos.y < 0 || screenMousePos.y > Screen.height)
             {
-                // Debug.Log("Mouse position out of bounds: " + screenMousePos);
+                // Debug.Log("Mouse position out of bounds);
                 yield break;
             }
             else if (screenMousePos.y > 505f)
             {
-                Debug.Log("Mouse on menu bar");
+                // Debug.Log("Mouse on menu bar");
                 yield break;
             }
 
@@ -111,6 +109,17 @@ public class BallController : MonoBehaviour
 
     }
 
+    ///// ~ fancy ~  METHODS /////
+    public void TrueCanHitBall()
+    {
+        _canHitBall = true;
+    }
+
+    public void FalseCanHitBall()
+    {
+        _canHitBall = false;
+    }
+
     public float CalculateForce(float time)
     {
         float result = (Mathf.Sin(time) + 1) * force;
@@ -125,7 +134,7 @@ public class BallController : MonoBehaviour
     public void HitByClub(Vector2 angle, float thisForce)
     {
         rb2d.AddForce(angle * thisForce * 10f);   
-        levelStatManager?.AddStroke();
+        _levelStatManager?.AddStroke();
         AudioManagerScript.instance.PlayHitSound();
     }
 

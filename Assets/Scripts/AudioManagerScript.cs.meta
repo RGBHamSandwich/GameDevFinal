@@ -1,2 +1,25 @@
 fileFormatVersion: 2
 guid: 51de1942cbe863844be80828b9cc6108
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - musicSource: {instanceID: 0}
+  - sfxSource: {instanceID: 0}
+  - titleMusic: {instanceID: 0}
+  - levelMusic: {instanceID: 0}
+  - hitSound: {instanceID: 0}
+  - holeSound: {instanceID: 0}
+  - sandSound: {instanceID: 0}
+  - waterSound: {instanceID: 0}
+  - bounceSound: {instanceID: 0}
+  - brotherHitSound: {instanceID: 0}
+  - startButtonSound: {instanceID: 0}
+  - menuButtonSound: {instanceID: 0}
+  - ClickInSound: {instanceID: 0}
+  - ClickOutSound: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

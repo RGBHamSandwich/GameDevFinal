@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class PlayerAnimationController : MonoBehaviour
 {
+    ///// PRIVATE VARIABLES /////
     private Animator _playerAnimator;
 
+    ///// GIVEN METHODS /////
     void Start()
     {
         _playerAnimator = GetComponent<Animator>();
@@ -12,6 +14,7 @@ public class PlayerAnimationController : MonoBehaviour
         BallController.EOnPlayerSwing += TriggerSwing;
         BallController.EOnBallStop += TriggerWalk;
         PlayerMovementController.EOnPlayerIdle += TriggerIdle;
+        LevelStatManager.EOnPlayerCry += TriggerCry;
     }
 
     void OnDestroy()
@@ -19,35 +22,36 @@ public class PlayerAnimationController : MonoBehaviour
         BallController.EOnPlayerSwing -= TriggerSwing;
         BallController.EOnBallStop -= TriggerWalk;
         PlayerMovementController.EOnPlayerIdle -= TriggerIdle;
+        LevelStatManager.EOnPlayerCry -= TriggerCry;
     }
 
     void Update()
-    {
-        
+    {    
     }
 
+    ///// TRIGGERS /////
     private void TriggerSwing()
     {
         _playerAnimator.SetTrigger("PlayerSwingTrigger");
-        Debug.Log("Player swing triggered!");
+        // Debug.Log("Player swing triggered!");
     }
 
     private void TriggerCry()
     {
         _playerAnimator.SetTrigger("PlayerCryTrigger");
-        Debug.Log("Player cry triggered!");
+        // Debug.Log("Player cry triggered!");
     }
 
     private void TriggerWalk()
     {
         _playerAnimator.SetTrigger("PlayerWalkTrigger");
-        Debug.Log("Player walk triggered!");
+        // Debug.Log("Player walk triggered!");
     }
 
     private void TriggerIdle()
     {
         _playerAnimator.SetTrigger("PlayerIdleTrigger");
-        Debug.Log("Player idle triggered!");
+        // Debug.Log("Player idle triggered!");
     }
 
 }

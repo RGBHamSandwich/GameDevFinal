@@ -2,31 +2,45 @@ using UnityEngine;
 
 public class TitleUIManagerScript : MonoBehaviour
 {
-    private NextLevelScript nextLevelScript;
-    private AudioManagerScript audioManagerScript;
+    ///// PRIVATE VARIABLES /////
+    private LevelStatManager _levelStatManager;
+    private AudioManagerScript _audioManagerScript;
+    private MenuUIManagerScript _menuUIManagerScript;
+
+    ///// GIVEN METHODS /////
     void Start()
     {
-        nextLevelScript = FindFirstObjectByType<NextLevelScript>();
-        audioManagerScript = FindFirstObjectByType<AudioManagerScript>();
+        _levelStatManager = FindFirstObjectByType<LevelStatManager>();
+        _audioManagerScript = FindFirstObjectByType<AudioManagerScript>();
+        _menuUIManagerScript = FindFirstObjectByType<MenuUIManagerScript>();
     }
 
     void Update()
     {
     }
 
+    ///// TITLE SCREEN BUTTONS /////
     public void StartButton()
     {
         // switch to the first level scene!
         Debug.Log("Start Button Pressed");
-        nextLevelScript?.cueNextLevel(1);
-        audioManagerScript?.PlayStartButtonSound();
-        audioManagerScript?.PlayLevelMusic();
+        _levelStatManager?.StartGame();
+
+        if (_levelStatManager == null)
+        {
+            Debug.LogError("LevelStatManager not found!");
+            return;
+        }
+
+        _audioManagerScript?.PlayStartButtonSound();
+        _audioManagerScript?.PlayLevelMusic();
     }
 
     public void MenuButton()
     {
         Debug.Log("Menu Button Pressed");
-        // switch to a menu scene? cue a popup??? hrm
-        audioManagerScript?.PlayMenuButtonSound();
+        _audioManagerScript?.PlayMenuButtonSound();
+        // refer to the menu UI manager script to open the menu to be consistent :)
+        _menuUIManagerScript?.SettingsButton();
     }
 }
