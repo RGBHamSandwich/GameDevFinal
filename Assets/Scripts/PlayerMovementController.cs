@@ -12,10 +12,13 @@ public class PlayerMovementController : MonoBehaviour
     private Transform _playerTransform;
     private Transform _ballTransform;
     private SpriteRenderer _playerSpriteRenderer;
+    private LevelStatManager _levelStatManager;
 
     ///// ANIMATION /////
     public delegate void PlayerIdle();
     public static event PlayerIdle EOnPlayerIdle;
+    public delegate void OnPlayerCry();
+    public static event OnPlayerCry EOnPlayerCry;
 
     ///// GIVEN METHODS /////
     void Start()
@@ -24,6 +27,7 @@ public class PlayerMovementController : MonoBehaviour
         _playerTransform = GetComponent<Transform>();
         _ballTransform = GameObject.FindGameObjectWithTag("Ball").GetComponent<Transform>();
         _playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        _levelStatManager = FindFirstObjectByType<LevelStatManager>();
     }
 
     void Update()
@@ -45,6 +49,14 @@ public class PlayerMovementController : MonoBehaviour
 
             _playerTransform.position = Vector2.MoveTowards(current, target, walkSpeed * Time.deltaTime);
             EOnPlayerIdle?.Invoke();
+
+            if(_levelStatManager.strokes >= _levelStatManager.strokesToBeat && _levelStatManager.level != 0)
+            {
+                EOnPlayerCry?.Invoke();
+                yield return new WaitForSeconds(3f);
+                // cue the losing scene
+                _levelStatManager.TooManyStrokes();
+            }
 
             // once the players stops moving, they can hit the ball again
             _ballController?.TrueCanHitBall();

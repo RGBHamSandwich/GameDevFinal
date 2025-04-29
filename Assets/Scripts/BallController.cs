@@ -50,7 +50,7 @@ public class BallController : MonoBehaviour
     private IEnumerator _canHitBallCoroutine()
     {
         yield return new WaitForSeconds(1f);
-        while (rb2d.linearVelocity.magnitude > 0.1f)
+        while (rb2d.linearVelocity.magnitude > 0.2f)
         {
             // wait until the ball stops to reset _canHitBall
             yield return null;
@@ -75,11 +75,12 @@ public class BallController : MonoBehaviour
 
         if(Input.GetMouseButtonUp(0))              // true on click up
         {
+
             // Debug.Log("Mouse up");
             holdDownMouseTime = Time.time - holdDownMouseTime;
 
             Vector2 screenMousePos = Input.mousePosition;
-            Debug.Log("Screen click position: " + screenMousePos);
+            // Debug.Log("Screen click position: " + screenMousePos);
 
             if(!IsMouseInGame(screenMousePos))
             {
@@ -112,7 +113,7 @@ public class BallController : MonoBehaviour
         float x = screenMousePos.x;
         float y = screenMousePos.y;
         float screenHeight = Screen.height;
-        Debug.Log("Screen height: " + screenHeight);
+        // Debug.Log("Screen height: " + screenHeight);
 
         if (x < 0 || x > Screen.width || y < 0 || y > screenHeight)
         {
@@ -122,7 +123,7 @@ public class BallController : MonoBehaviour
 
         // Since (0,0) is bottom-left, and menu bar is at top:
         float maxInGameHeight = screenHeight - _levelStatManager._levelStatUIHeight;
-        Debug.Log("Max click height: " + maxInGameHeight);
+        // Debug.Log("Max click height: " + maxInGameHeight);
         return y <= maxInGameHeight;
     }
 

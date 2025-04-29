@@ -15,6 +15,7 @@ public class PlayerAnimationController : MonoBehaviour
         BallController.EOnBallStop += TriggerWalk;
         PlayerMovementController.EOnPlayerIdle += TriggerIdle;
         LevelStatManager.EOnPlayerCry += TriggerCry;
+        PlayerMovementController.EOnPlayerCry += TriggerCry;
     }
 
     void OnDestroy()
@@ -23,6 +24,7 @@ public class PlayerAnimationController : MonoBehaviour
         BallController.EOnBallStop -= TriggerWalk;
         PlayerMovementController.EOnPlayerIdle -= TriggerIdle;
         LevelStatManager.EOnPlayerCry -= TriggerCry;
+        PlayerMovementController.EOnPlayerCry -= TriggerCry;
     }
 
     void Update()

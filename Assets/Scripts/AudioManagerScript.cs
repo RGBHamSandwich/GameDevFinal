@@ -70,6 +70,17 @@ public class AudioManagerScript : MonoBehaviour
         }
     }
 
+    ///// THEMES /////
+    public void PlayTitleMusic()
+    {
+        musicSource.Stop();
+        musicSource.clip = titleMusic;
+        musicSource.loop = true;
+        musicSource.volume = musicVolume;
+        musicSource.PlayDelayed(0.5f); // optional delay
+        Debug.Log("Title music played!");
+    }
+
     public void PlayLevelMusic()
     {
         musicSource.Stop();

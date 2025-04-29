@@ -9,7 +9,7 @@ public class LevelStatManager : MonoBehaviour
     [Header("Level Stats")]
     public int numberOfLevels = 1;
     public int strokes = 0;
-    public int strokesToBeat = 20;
+    public int strokesToBeat = 3;
     public int level = 0;
     [Tooltip("How tall the menu bar is in pixels.")]
     public float _levelStatUIHeight = 50f;
@@ -22,6 +22,7 @@ public class LevelStatManager : MonoBehaviour
     private TextMeshProUGUI StrokeToBeat;
     private TextMeshProUGUI LevelCounter;
     private BallEnvironmentInteractionScript _ball;
+    private AudioManagerScript _audioManagerScript;
 
     ///// ANIMATION /////
     public delegate void OnPlayerCry();
@@ -39,22 +40,22 @@ public class LevelStatManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if(!resetLowScore)
+        {
+            strokesToBeat = PlayerPrefs.GetInt("strokesToBeat", 30);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("strokesToBeat", strokesToBeat);
+            PlayerPrefs.Save();
+        }
     }
 
     void Start()
     {
         _ball = FindFirstObjectByType<BallEnvironmentInteractionScript>();
-
-        if(!resetLowScore)
-        {
-            strokesToBeat = PlayerPrefs.GetInt("strokesToBeat", 20);
-        }
-        else
-        {
-            PlayerPrefs.SetInt("strokesToBeat", 50);
-            PlayerPrefs.Save();
-            strokesToBeat = 50;
-        }
+        _audioManagerScript = FindFirstObjectByType<AudioManagerScript>();
 
         FindLevelText();
         // StrokeCounter.text = "Stroke " + strokes.ToString();
@@ -100,6 +101,7 @@ public class LevelStatManager : MonoBehaviour
         {
             // we're on the title screen, so we don't want to increment the level
             // to start the game, the Start Button accesses StartGame() directly
+            ResetText();
             return;
         }
 
@@ -120,13 +122,20 @@ public class LevelStatManager : MonoBehaviour
 
         if (level < 0)
         {
-            level = 0;
-            StartCoroutine(NextLevelCoroutine("TitleScene"));   // reset the game
+            cueTitleScene();
             return;
         }
+
         string LevelName = "Level" + level.ToString();
-        // Debug.Log("cueNextLevel prompted");
         StartCoroutine(NextLevelCoroutine(LevelName));
+    }
+
+    public void cueTitleScene()
+    {
+        level = 0;
+        LevelCounter.text = "Level: " + level.ToString();
+        _audioManagerScript?.PlayTitleMusic();
+        StartCoroutine(NextLevelCoroutine("TitleScene"));   // reset the game
     }
 
     public void FindLevelText()
@@ -176,8 +185,12 @@ public class LevelStatManager : MonoBehaviour
     public void TooManyStrokes()
     {
         // implement screen of failure
-        cueNextLevel();
+        if(level != 0)
+        {
+            cueTitleScene();
+        }
         ResetText();
+        // lose sound????
         EOnPlayerCry?.Invoke();
     }
 
