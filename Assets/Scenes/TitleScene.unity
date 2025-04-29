@@ -651,6 +651,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2772430490017233084, guid: cb86a77726b513a4dacad654b4188daa, type: 3}
+      propertyPath: numberOfLevels
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 708877942765094615, guid: cb86a77726b513a4dacad654b4188daa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -690,10 +694,6 @@ PrefabInstance:
     - target: {fileID: 708877942765094615, guid: cb86a77726b513a4dacad654b4188daa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5446214648072211026, guid: cb86a77726b513a4dacad654b4188daa, type: 3}
-      propertyPath: m_text
-      value: 'To Beat: 10'
       objectReference: {fileID: 0}
     - target: {fileID: 6663861282928420438, guid: cb86a77726b513a4dacad654b4188daa, type: 3}
       propertyPath: m_Name

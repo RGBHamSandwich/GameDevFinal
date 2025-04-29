@@ -11,6 +11,10 @@ public class LevelStatManager : MonoBehaviour
     public int strokes = 0;
     public int strokesToBeat = 20;
     public int level = 0;
+    [Tooltip("How tall the menu bar is in pixels.")]
+    public float _levelStatUIHeight = 50f;
+    [Tooltip("Set to true to restart the game's low score.")]
+    public bool resetLowScore = false;
     public static LevelStatManager instance;
     
     ///// PRIVATE VARIABLES /////    
@@ -40,6 +44,17 @@ public class LevelStatManager : MonoBehaviour
     void Start()
     {
         _ball = FindFirstObjectByType<BallEnvironmentInteractionScript>();
+
+        if(!resetLowScore)
+        {
+            strokesToBeat = PlayerPrefs.GetInt("strokesToBeat", 20);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("strokesToBeat", 50);
+            PlayerPrefs.Save();
+            strokesToBeat = 50;
+        }
 
         FindLevelText();
         // StrokeCounter.text = "Stroke " + strokes.ToString();

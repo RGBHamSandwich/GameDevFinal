@@ -495,9 +495,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42b4a3477f2dacc4fa0e74c88c00092d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfLevels: 4
   strokes: 0
   strokesToBeat: 10
   level: 0
+  _levelStatUIHeight: 50
+  resetLowScore: 1
 --- !u!1 &7098534068538644643
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,7 +702,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'To Beat: 50'
+  m_text: 'To Beat: 10'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 641397d4119a42f4da8b236ecc50ccd7, type: 2}
   m_sharedMaterial: {fileID: -14386304816164214, guid: 641397d4119a42f4da8b236ecc50ccd7, type: 2}
