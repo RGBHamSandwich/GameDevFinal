@@ -6,11 +6,13 @@ public class BallController : MonoBehaviour
     ///// PUBLIC VARIABLES /////
     [Tooltip("The force applied to the ball when hit.")]
     public float force = 30f;  
+    [Tooltip("The height of the menu bar in pixels.")]
     
     ///// PRIVATE VARIABLES /////
     private Rigidbody2D rb2d;
     private LevelStatManager _levelStatManager;
     private PlayerMovementController _playerMovementController;
+    private AudioManagerScript _audioManagerScript;
     private bool _canHitBall = true;
     private float holdDownMouseTime = 0f;
 
@@ -28,6 +30,7 @@ public class BallController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         _levelStatManager = FindFirstObjectByType<LevelStatManager>();
         _playerMovementController = FindFirstObjectByType<PlayerMovementController>();
+        _audioManagerScript = FindFirstObjectByType<AudioManagerScript>();
     }
 
     void Update()
@@ -76,15 +79,11 @@ public class BallController : MonoBehaviour
             holdDownMouseTime = Time.time - holdDownMouseTime;
 
             Vector2 screenMousePos = Input.mousePosition;
-            // Debug.Log("Screen click position: " + screenMousePos);
-            if (screenMousePos.x < 0 || screenMousePos.x > Screen.width || screenMousePos.y < 0 || screenMousePos.y > Screen.height)
+            Debug.Log("Screen click position: " + screenMousePos);
+
+            if(!IsMouseInGame(screenMousePos))
             {
-                // Debug.Log("Mouse position out of bounds);
-                yield break;
-            }
-            else if (screenMousePos.y > 505f)
-            {
-                // Debug.Log("Mouse on menu bar");
+                // Debug.Log("Mouse position out of bounds; not hitting ball");
                 yield break;
             }
 
@@ -93,23 +92,40 @@ public class BallController : MonoBehaviour
             Vector2 direction = (worldMousePos - (Vector2)this.transform.position).normalized;
             _canHitBall = false;
             EOnPlayerSwing?.Invoke();
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1f);    // delay for swing animation
 
             HitByClub(direction, CalculateForce(holdDownMouseTime));
-            EOnBallHit?.Invoke();
-            StartCoroutine(_canHitBallCoroutine()); 
         }
 
         if(Input.GetMouseButton(0))                 // true while holding down
         {
             // Debug.Log("Mouse held down");
             holdDownMouseTime = Time.time - holdDownMouseTime;
-            ShowForce(CalculateForce(holdDownMouseTime));
+            ShowForce(CalculateForce(holdDownMouseTime));   // not yet implemented; remove if not needed
         }
 
     }
 
     ///// ~ fancy ~  METHODS /////
+    public bool IsMouseInGame(Vector2 screenMousePos)
+    {
+        float x = screenMousePos.x;
+        float y = screenMousePos.y;
+        float screenHeight = Screen.height;
+        Debug.Log("Screen height: " + screenHeight);
+
+        if (x < 0 || x > Screen.width || y < 0 || y > screenHeight)
+        {
+            // Debug.Log("Mouse position out of bounds");
+            return false;
+        }
+
+        // Since (0,0) is bottom-left, and menu bar is at top:
+        float maxInGameHeight = screenHeight - _levelStatManager._levelStatUIHeight;
+        Debug.Log("Max click height: " + maxInGameHeight);
+        return y <= maxInGameHeight;
+    }
+
     public void TrueCanHitBall()
     {
         _canHitBall = true;
@@ -126,16 +142,17 @@ public class BallController : MonoBehaviour
         return result;
     }
 
-    public void ShowForce(float time)
+    public void ShowForce(float time)   // not yet implemented
     {
-        // halp
     }
 
     public void HitByClub(Vector2 angle, float thisForce)
     {
+        EOnBallHit?.Invoke();
+        StartCoroutine(_canHitBallCoroutine()); 
+
         rb2d.AddForce(angle * thisForce * 10f);   
         _levelStatManager?.AddStroke();
-        AudioManagerScript.instance.PlayHitSound();
+        _audioManagerScript.PlayHitSound();
     }
-
 }
