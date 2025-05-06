@@ -17,8 +17,6 @@ public class PlayerMovementController : MonoBehaviour
     ///// ANIMATION /////
     public delegate void PlayerIdle();
     public static event PlayerIdle EOnPlayerIdle;
-    public delegate void OnPlayerCry();
-    public static event OnPlayerCry EOnPlayerCry;
     public delegate void PlayerWalk();
     public static event PlayerWalk EOnPlayerWalk;
 
@@ -32,22 +30,9 @@ public class PlayerMovementController : MonoBehaviour
         _levelStatManager = FindFirstObjectByType<LevelStatManager>();
     }
 
-    void Update()
-    {
-    }
-
     ///// COROUTINES /////
-    private IEnumerator _movePlayerCoroutine()
+    private IEnumerator _movePlayerCoroutine(Vector2 current, Vector2 target)
         {
-            Vector2 target = _ballTransform.position;
-            Vector2 current = _playerTransform.position;
-            
-            if(Vector2.Distance(current, target) < 1f)
-            {
-                _ballController?.TrueCanHitBall();
-                yield break;
-            }
-
             EOnPlayerWalk?.Invoke();
 
             while (Vector2.Distance(current, target) > 0.5f)
@@ -62,9 +47,7 @@ public class PlayerMovementController : MonoBehaviour
 
             if(_levelStatManager.strokes >= _levelStatManager.strokesToBeat && _levelStatManager.level != 0)
             {
-                EOnPlayerCry?.Invoke();
                 yield return new WaitForSeconds(3f);
-                // cue the losing scene
                 _levelStatManager.TooManyStrokes();
             }
 
@@ -75,22 +58,27 @@ public class PlayerMovementController : MonoBehaviour
     ///// ~ fancy ~  METHODS /////
     public void MovePlayer()
     {
-        // get direction from player to ball
         Vector2 direction = _ballTransform.position - _playerTransform.position;
         direction.Normalize();
 
         if(direction.x < 0)
             {
-                // Debug.Log("Mouse left; x = " + direction.x);
                 _playerSpriteRenderer.flipX = true;
             }
             else if(direction.x > 0)
             {
-                // Debug.Log("Mouse right; x = " + direction.x);
                 _playerSpriteRenderer.flipX = false;
             }
 
-        // start the coroutine to move the player
-        StartCoroutine(_movePlayerCoroutine());
+        Vector2 target = _ballTransform.position;
+        Vector2 current = _playerTransform.position;
+        
+        if(Vector2.Distance(current, target) < 1f)
+        {
+            _ballController?.TrueCanHitBall();
+            return;
+        }
+
+        StartCoroutine(_movePlayerCoroutine(current, target));
     }
 }
