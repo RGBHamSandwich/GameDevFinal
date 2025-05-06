@@ -123,8 +123,7 @@ public class LevelStatManager : MonoBehaviour
                 return;
             }
 
-            StartCoroutine(NextLevelCoroutine("TitleScene"));   // reset the game
-            ResetText();
+            TooManyStrokes();
             return;
         }   
 
@@ -208,7 +207,7 @@ public class LevelStatManager : MonoBehaviour
             cueDefeatScene();
         }
         ResetText();
-        EOnPlayerCry?.Invoke();
+        // EOnPlayerCry?.Invoke();
     }
 
     public void ResetText()

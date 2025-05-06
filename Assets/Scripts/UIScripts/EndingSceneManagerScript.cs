@@ -8,11 +8,6 @@ public class EndingSceneManagerScript : MonoBehaviour
         _levelStatManager = FindFirstObjectByType<LevelStatManager>();
     }
 
-    void Update()
-    {
-        
-    }
-
     public void TryAgainButton()
     {
         _levelStatManager.cueTitleScene();

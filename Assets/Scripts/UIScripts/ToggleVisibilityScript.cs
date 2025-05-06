@@ -35,13 +35,13 @@ public class ToggleVisibilityScript : MonoBehaviour
         FindLevelObjects();
         if (_levelStatManager.level <= 0)
         {
-            Canvas titleScreenCanvas = titleScreenUI.GetComponent<Canvas>();
-            if (titleScreenCanvas == null)
+            if (titleScreenUI == null)
             {
-                Debug.Log("Title Screen Canvas not found!");
+                Debug.Log("Title Screen IU not found!");
             }
             else
             {
+                Canvas titleScreenCanvas = titleScreenUI.GetComponent<Canvas>();
                 titleScreenCanvas.enabled = false;
             }
         }
@@ -59,13 +59,13 @@ public class ToggleVisibilityScript : MonoBehaviour
     {
         if (_levelStatManager.level <= 0)
         {
-            Canvas titleScreenCanvas = titleScreenUI.GetComponent<Canvas>();
-            if (titleScreenCanvas == null)
+            if (titleScreenUI == null)
             {
                 Debug.Log("Title Screen Canvas not found!");
             }
             else
             {
+                Canvas titleScreenCanvas = titleScreenUI.GetComponent<Canvas>();
                 titleScreenCanvas.enabled = true;
             }
         }

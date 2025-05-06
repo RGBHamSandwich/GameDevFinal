@@ -604,7 +604,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -2772430490017233084, guid: cb86a77726b513a4dacad654b4188daa, type: 3}
-      propertyPath: numberOfLevels
+      propertyPath: resetLowScore
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 708877942765094615, guid: cb86a77726b513a4dacad654b4188daa, type: 3}
@@ -652,8 +652,7 @@ PrefabInstance:
       value: LevelStatManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 8865172238715683929, guid: cb86a77726b513a4dacad654b4188daa, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb86a77726b513a4dacad654b4188daa, type: 3}
