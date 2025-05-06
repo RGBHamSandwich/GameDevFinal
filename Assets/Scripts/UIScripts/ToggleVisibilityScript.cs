@@ -13,12 +13,14 @@ public class ToggleVisibilityScript : MonoBehaviour
     private BallController _ballControllerScript;
     private PlayerMovementController _playerMovementControllerScript;
 
+    ///// GIVEN METHODS /////
     void Start()
     {
         _levelStatManager = FindFirstObjectByType<LevelStatManager>();
         FindLevelObjects();
     }
 
+    ///// ~ fancy ~  METHODS /////
     public void FindLevelObjects()
     {
         _ballControllerScript = FindFirstObjectByType<BallController>();
@@ -35,11 +37,7 @@ public class ToggleVisibilityScript : MonoBehaviour
         FindLevelObjects();
         if (_levelStatManager.level <= 0)
         {
-            if (titleScreenUI == null)
-            {
-                Debug.Log("Title Screen IU not found!");
-            }
-            else
+            if (!(titleScreenUI == null))
             {
                 Canvas titleScreenCanvas = titleScreenUI.GetComponent<Canvas>();
                 titleScreenCanvas.enabled = false;
@@ -59,11 +57,7 @@ public class ToggleVisibilityScript : MonoBehaviour
     {
         if (_levelStatManager.level <= 0)
         {
-            if (titleScreenUI == null)
-            {
-                Debug.Log("Title Screen Canvas not found!");
-            }
-            else
+            if (!(titleScreenUI == null))
             {
                 Canvas titleScreenCanvas = titleScreenUI.GetComponent<Canvas>();
                 titleScreenCanvas.enabled = true;
@@ -78,7 +72,7 @@ public class ToggleVisibilityScript : MonoBehaviour
         levelGameplay?.SetActive(true);
         _ballControllerScript?.TrueCanHitBall();
 
-        _playerMovementControllerScript?.MovePlayer(); // moves the player in case it was interrupted
+        _playerMovementControllerScript?.MovePlayer(); // moves the player in case menu interrupted movement
     }
 
 }

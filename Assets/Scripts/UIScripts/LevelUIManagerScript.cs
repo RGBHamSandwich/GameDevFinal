@@ -21,7 +21,6 @@ public class LevelUIManagerScript : MonoBehaviour
     ///// MENU BUTTONS /////
     public void ExitGameButton()
     {
-        Debug.Log("Exit Game Button Pressed");
         _audioManagerScript?.PlayClickInSound();
         _toggleVisibilityScript?.HideVisuals();
         InitializeConfirmMenu();
@@ -38,7 +37,6 @@ public class LevelUIManagerScript : MonoBehaviour
     public void InitalizeSettingsMenu()
     {
         Instantiate(settingsMenu, transform.position, Quaternion.identity);
-        Debug.Log("Settings Menu Opened");
     }
 
     public void InitializeConfirmMenu()

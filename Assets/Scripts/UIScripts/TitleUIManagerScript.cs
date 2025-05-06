@@ -15,32 +15,17 @@ public class TitleUIManagerScript : MonoBehaviour
         _menuUIManagerScript = FindFirstObjectByType<LevelUIManagerScript>();
     }
 
-    void Update()
-    {
-    }
-
     ///// TITLE SCREEN BUTTONS /////
     public void StartButton()
     {
-        // switch to the first level scene!
-        Debug.Log("Start Button Pressed");
         _levelStatManager?.StartGame();
-
-        if (_levelStatManager == null)
-        {
-            Debug.LogError("LevelStatManager not found!");
-            return;
-        }
-
         _audioManagerScript?.PlayStartButtonSound();
         _audioManagerScript?.PlayLevelMusic();
     }
 
     public void MenuButton()
     {
-        Debug.Log("Menu Button Pressed");
         _audioManagerScript?.PlayMenuButtonSound();
-        // refer to the menu UI manager script to open the menu to be consistent :)
         _menuUIManagerScript?.SettingsButton();
     }
 }

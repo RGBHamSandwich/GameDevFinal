@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class StartSceneManagerScript : MonoBehaviour
 {
+    ///// BUTTONS /////
     public void Challenge()
     {
-        // Load the challenge scene
         UnityEngine.SceneManagement.SceneManager.LoadScene("TitleScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 

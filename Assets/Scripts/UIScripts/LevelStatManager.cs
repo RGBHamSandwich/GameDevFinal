@@ -24,10 +24,6 @@ public class LevelStatManager : MonoBehaviour
     private BallEnvironmentInteractionScript _ball;
     private AudioManagerScript _audioManagerScript;
     private ToggleVisibilityScript _toggleVisibilityScript;
-
-    ///// ANIMATION /////
-    public delegate void OnPlayerCry();
-    public static event OnPlayerCry EOnPlayerCry;
     
     ///// GIVEN METHODS /////    
     private void Awake()

@@ -6,11 +6,6 @@ public class SettingsUIManagerScript : MonoBehaviour
     ///// PUBLIC VARIABLES /////
     [Header("Menu Prefab")]
     public GameObject confirmMenu;
-    [Header("Settings Auto-Assigned Values")]
-    public GameObject ENVIRONMENT;
-    public GameObject GAMEPLAY;
-    public GameObject titleScreenUI;
-    public GameObject levelUI;
     [Header("Menu Buttons")]
     public Toggle musicToggle;
     public Slider musicSlider;
@@ -19,21 +14,20 @@ public class SettingsUIManagerScript : MonoBehaviour
 
     ///// PRIVATE VARIABLES /////
     private AudioManagerScript _audioManagerScript;
-    private BallController _ballControllerScript;
     private ToggleVisibilityScript _toggleVisibilityScript;
     // private ConfirmUIManagerScript _confirmUIManagerScript;
 
-    ///// METHODS /////
+    ///// GIVEN METHODS /////
     void Start()
     {
         _audioManagerScript = FindFirstObjectByType<AudioManagerScript>();
-        _ballControllerScript = FindFirstObjectByType<BallController>();
         _toggleVisibilityScript = FindFirstObjectByType<ToggleVisibilityScript>();
     }
 
+    ///// SETTINGS BUTTONS /////
     public void SettingsCloseButton()
     {
-        _toggleVisibilityScript.ShowVisuals();       // initializes values for levelEnvironment, levelGameplay, titleScreenUI, and levelUI
+        _toggleVisibilityScript.ShowVisuals();
         _audioManagerScript?.PlayClickOutSound();   
         Destroy(transform.root.gameObject);
     }
