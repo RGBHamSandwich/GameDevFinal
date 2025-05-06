@@ -118,8 +118,8 @@ public class LevelStatManager : MonoBehaviour
         {
             if(strokes <= strokesToBeat)
             {
-                cueVictoryScene();
                 SetStrokesToBeat(); 
+                cueVictoryScene();
                 return;
             }
 
@@ -147,14 +147,12 @@ public class LevelStatManager : MonoBehaviour
     
     public void cueVictoryScene()
     {
-        ResetText();
         _audioManagerScript?.PlayTitleMusic();                          // victory music?
         StartCoroutine(NextLevelCoroutine("Victory"));
     }
 
     public void cueDefeatScene()
     {
-        ResetText();
         _audioManagerScript?.PlayTitleMusic();                         // defeat music?  
         StartCoroutine(NextLevelCoroutine("Defeat"));
     }

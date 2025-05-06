@@ -18,7 +18,16 @@ EditorBuildSettings:
     path: Assets/Scenes/Level3.unity
     guid: bca598f665402bf48892b7044d6c8250
   - enabled: 1
+    path: Assets/Scenes/Level4.unity
+    guid: 020aa7790fb9e3c44a3b7508c730587f
+  - enabled: 1
     path: Assets/Scenes/Level5.unity
     guid: 99c4f16f5158aeb499d99fef27311806
+  - enabled: 1
+    path: Assets/Scenes/Level6.unity
+    guid: b126e3adc10abfd42af18bbd6ced73dd
+  - enabled: 1
+    path: Assets/Scenes/Victory.unity
+    guid: 93fab8b2b67c1e3458062ee651b48c6a
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

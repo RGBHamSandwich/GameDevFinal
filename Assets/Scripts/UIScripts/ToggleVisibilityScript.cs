@@ -36,15 +36,22 @@ public class ToggleVisibilityScript : MonoBehaviour
         if (_levelStatManager.level <= 0)
         {
             Canvas titleScreenCanvas = titleScreenUI.GetComponent<Canvas>();
-            titleScreenCanvas.enabled = false;
+            if (titleScreenCanvas == null)
+            {
+                Debug.Log("Title Screen Canvas not found!");
+            }
+            else
+            {
+                titleScreenCanvas.enabled = false;
+            }
         }
 
         Canvas levelUICanvas = levelUI.GetComponent<Canvas>();
         levelUICanvas.enabled = false; 
 
-        levelEnvironment.SetActive(false);
+        levelEnvironment?.SetActive(false);
 
-        levelGameplay.SetActive(false);
+        levelGameplay?.SetActive(false);
         _ballControllerScript?.FalseCanHitBall();
     }
 
@@ -53,15 +60,22 @@ public class ToggleVisibilityScript : MonoBehaviour
         if (_levelStatManager.level <= 0)
         {
             Canvas titleScreenCanvas = titleScreenUI.GetComponent<Canvas>();
-            titleScreenCanvas.enabled = true;
+            if (titleScreenCanvas == null)
+            {
+                Debug.Log("Title Screen Canvas not found!");
+            }
+            else
+            {
+                titleScreenCanvas.enabled = true;
+            }
         }
 
         Canvas levelUICanvas = levelUI.GetComponent<Canvas>();
         levelUICanvas.enabled = true;
 
-        levelEnvironment.SetActive(true);
+        levelEnvironment?.SetActive(true);
 
-        levelGameplay.SetActive(true);
+        levelGameplay?.SetActive(true);
         _ballControllerScript?.TrueCanHitBall();
 
         _playerMovementControllerScript?.MovePlayer(); // moves the player in case it was interrupted
