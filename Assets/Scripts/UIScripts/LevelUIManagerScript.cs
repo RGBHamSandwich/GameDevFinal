@@ -8,18 +8,13 @@ public class LevelUIManagerScript : MonoBehaviour
     public GameObject settingsMenu;
     public GameObject confirmMenu;
     ///// PRIVATE VARIABLES /////
-    private LevelStatManager _levelStatManager;
     private AudioManagerScript _audioManagerScript;
-    private BallController _ballControllerScript;
     private ToggleVisibilityScript _toggleVisibilityScript;
-    private SettingsUIManagerScript _settingsUIManagerScript;
 
     ///// GIVEN METHODS /////
     void Start()
     {
-        _levelStatManager = FindFirstObjectByType<LevelStatManager>();
         _audioManagerScript = FindFirstObjectByType<AudioManagerScript>();
-        _ballControllerScript = FindFirstObjectByType<BallController>();
         _toggleVisibilityScript = FindFirstObjectByType<ToggleVisibilityScript>();
     }
 
@@ -43,11 +38,6 @@ public class LevelUIManagerScript : MonoBehaviour
     public void InitalizeSettingsMenu()
     {
         Instantiate(settingsMenu, transform.position, Quaternion.identity);
-        _settingsUIManagerScript = FindFirstObjectByType<SettingsUIManagerScript>();
-        _settingsUIManagerScript.ENVIRONMENT = _toggleVisibilityScript.levelEnvironment;
-        _settingsUIManagerScript.GAMEPLAY = _toggleVisibilityScript.levelGameplay;
-        _settingsUIManagerScript.titleScreenUI = _toggleVisibilityScript.titleScreenUI;
-        _settingsUIManagerScript.levelUI = _toggleVisibilityScript.levelUI;
         Debug.Log("Settings Menu Opened");
     }
 

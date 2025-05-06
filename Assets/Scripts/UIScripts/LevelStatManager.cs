@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class LevelStatManager : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class LevelStatManager : MonoBehaviour
     private TextMeshProUGUI LevelCounter;
     private BallEnvironmentInteractionScript _ball;
     private AudioManagerScript _audioManagerScript;
+    private ToggleVisibilityScript _toggleVisibilityScript;
 
     ///// ANIMATION /////
     public delegate void OnPlayerCry();
@@ -56,6 +58,7 @@ public class LevelStatManager : MonoBehaviour
     {
         _ball = FindFirstObjectByType<BallEnvironmentInteractionScript>();
         _audioManagerScript = FindFirstObjectByType<AudioManagerScript>();
+        _toggleVisibilityScript = FindFirstObjectByType<ToggleVisibilityScript>();
 
         FindLevelText();
         // StrokeCounter.text = "Stroke " + strokes.ToString();
@@ -75,6 +78,9 @@ public class LevelStatManager : MonoBehaviour
         
         _ball = FindFirstObjectByType<BallEnvironmentInteractionScript>();
         _ball?.ResetBall();
+
+        _toggleVisibilityScript?.FindLevelObjects();
+
         yield return null;
     } 
 

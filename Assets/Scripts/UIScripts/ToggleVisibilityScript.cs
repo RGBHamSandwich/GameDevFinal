@@ -16,13 +16,14 @@ public class ToggleVisibilityScript : MonoBehaviour
     void Start()
     {
         _levelStatManager = FindFirstObjectByType<LevelStatManager>();
-        _ballControllerScript = FindFirstObjectByType<BallController>();
-        _playerMovementControllerScript = FindFirstObjectByType<PlayerMovementController>();
         FindLevelObjects();
     }
 
     public void FindLevelObjects()
     {
+        _ballControllerScript = FindFirstObjectByType<BallController>();
+        _playerMovementControllerScript = FindFirstObjectByType<PlayerMovementController>();
+        
         levelEnvironment = GameObject.FindGameObjectWithTag("ENVIRONMENT");
         levelGameplay = GameObject.FindGameObjectWithTag("GAMEPLAY");
         titleScreenUI = GameObject.FindGameObjectWithTag("TitleScreenUI");
