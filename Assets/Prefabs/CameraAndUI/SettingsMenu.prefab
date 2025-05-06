@@ -895,7 +895,7 @@ GameObject:
   - component: {fileID: 854701607171582950}
   m_Layer: 5
   m_Name: SettingsMenuCanvas
-  m_TagString: Untagged
+  m_TagString: SettingsUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1485,6 +1485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0f92aa12ec8a404cabbd408a57a9cdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  confirmMenu: {fileID: 4241525438411498319, guid: 154c57d201cf0fe45883615f082b75e7, type: 3}
   ENVIRONMENT: {fileID: 0}
   GAMEPLAY: {fileID: 0}
   titleScreenUI: {fileID: 0}
@@ -1502,10 +1503,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 241254082916091745}
-  - component: {fileID: 8558932797033554097}
   m_Layer: 0
   m_Name: SettingsMenu
-  m_TagString: SettingsUI
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1527,26 +1527,6 @@ Transform:
   - {fileID: 7392382577537239044}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8558932797033554097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8081820112518871616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0f92aa12ec8a404cabbd408a57a9cdf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ENVIRONMENT: {fileID: 0}
-  GAMEPLAY: {fileID: 0}
-  titleScreenUI: {fileID: 0}
-  levelUI: {fileID: 0}
-  musicToggle: {fileID: 7824186664818080214}
-  musicSlider: {fileID: 496710345845202382}
-  sfxToggle: {fileID: 601107520141366259}
-  sfxSlider: {fileID: 1194658674987302714}
 --- !u!1 &8285293855561123010
 GameObject:
   m_ObjectHideFlags: 0
