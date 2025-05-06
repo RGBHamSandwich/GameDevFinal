@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using TMPro;
-using UnityEngine.UI;
 
 public class LevelStatManager : MonoBehaviour
 {
@@ -80,6 +79,7 @@ public class LevelStatManager : MonoBehaviour
         _ball?.ResetBall();
 
         _toggleVisibilityScript?.FindLevelObjects();
+        _toggleVisibilityScript?.ShowVisuals();             // if visuals fuck up, it's this line
 
         yield return null;
     } 
@@ -118,9 +118,11 @@ public class LevelStatManager : MonoBehaviour
         {
             if(strokes <= strokesToBeat)
             {
-                // prompt the UIManager to show the "you win!" scene                                // create an OnWin method
+                cueVictoryScene();
                 SetStrokesToBeat(); 
+                return;
             }
+
             StartCoroutine(NextLevelCoroutine("TitleScene"));   // reset the game
             ResetText();
             return;
@@ -138,10 +140,23 @@ public class LevelStatManager : MonoBehaviour
 
     public void cueTitleScene()
     {
-        level = 0;
-        LevelCounter.text = "Level: " + level.ToString();
+        ResetText();
         _audioManagerScript?.PlayTitleMusic();
-        StartCoroutine(NextLevelCoroutine("TitleScene"));   // reset the game
+        StartCoroutine(NextLevelCoroutine("TitleScene"));
+    }
+    
+    public void cueVictoryScene()
+    {
+        ResetText();
+        _audioManagerScript?.PlayTitleMusic();                          // victory music?
+        StartCoroutine(NextLevelCoroutine("Victory"));
+    }
+
+    public void cueDefeatScene()
+    {
+        ResetText();
+        _audioManagerScript?.PlayTitleMusic();                         // defeat music?  
+        StartCoroutine(NextLevelCoroutine("Defeat"));
     }
 
     public void FindLevelText()
@@ -190,13 +205,11 @@ public class LevelStatManager : MonoBehaviour
 
     public void TooManyStrokes()
     {
-        // implement screen of failure
         if(level != 0)
         {
-            cueTitleScene();
+            cueDefeatScene();
         }
         ResetText();
-        // lose sound????
         EOnPlayerCry?.Invoke();
     }
 

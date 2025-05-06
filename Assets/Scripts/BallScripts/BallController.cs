@@ -1,5 +1,7 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BallController : MonoBehaviour
 {
@@ -13,7 +15,9 @@ public class BallController : MonoBehaviour
     private LevelStatManager _levelStatManager;
     private PlayerMovementController _playerMovementController;
     private AudioManagerScript _audioManagerScript;
+    private PowerBarControllerScript _powerBarControllerScript;
     private bool _canHitBall = true;
+    private float startHoldMouseTime = 0f;
     private float holdDownMouseTime = 0f;
 
     ///// ANIMATION /////
@@ -31,13 +35,14 @@ public class BallController : MonoBehaviour
         _levelStatManager = FindFirstObjectByType<LevelStatManager>();
         _playerMovementController = FindFirstObjectByType<PlayerMovementController>();
         _audioManagerScript = FindFirstObjectByType<AudioManagerScript>();
+        _powerBarControllerScript = FindFirstObjectByType<PowerBarControllerScript>();
     }
 
     void Update()
     {     
         if(_canHitBall)
         {
-            StartCoroutine(HandleHitCoroutine());
+            HandleHit();
         }
 
         if(rb2d.linearVelocity.magnitude >= 0.1f)
@@ -63,51 +68,46 @@ public class BallController : MonoBehaviour
         _playerMovementController?.MovePlayer();
     }
 
-    private IEnumerator HandleHitCoroutine()
+    private IEnumerator DelayHitCoroutine(Vector2 direction, float holdDownMouseTime)
     {
-        yield return null;
+        yield return new WaitForSeconds(1f);
+        HitByClub(direction, CalculateForce(holdDownMouseTime));
+    }
 
+    ///// ~ fancy ~  METHODS /////
+    public void HandleHit()
+    {
         if(Input.GetMouseButtonDown(0))            // true on click down
         {
-            // Debug.Log("Mouse down");
-            holdDownMouseTime = Time.time;
+            startHoldMouseTime = Time.time;
         }
 
         if(Input.GetMouseButtonUp(0))              // true on click up
         {
-
-            // Debug.Log("Mouse up");
-            holdDownMouseTime = Time.time - holdDownMouseTime;
-
             Vector2 screenMousePos = Input.mousePosition;
-            // Debug.Log("Screen click position: " + screenMousePos);
 
             if(!IsMouseInGame(screenMousePos))
             {
-                // Debug.Log("Mouse position out of bounds; not hitting ball");
-                yield break;
+                return;
             }
 
             Vector2 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            // Debug.Log("World click position: " + worldMousePos);
             Vector2 direction = (worldMousePos - (Vector2)this.transform.position).normalized;
+            
             _canHitBall = false;
             EOnPlayerSwing?.Invoke();
-            yield return new WaitForSeconds(1f);    // delay for swing animation
-
-            HitByClub(direction, CalculateForce(holdDownMouseTime));
+            StartCoroutine(DelayHitCoroutine(direction, holdDownMouseTime));
         }
 
         if(Input.GetMouseButton(0))                 // true while holding down
         {
             // Debug.Log("Mouse held down");
-            holdDownMouseTime = Time.time - holdDownMouseTime;
-            ShowForce(CalculateForce(holdDownMouseTime));   // not yet implemented; remove if not needed
+            holdDownMouseTime = Time.time - startHoldMouseTime;
+            _powerBarControllerScript?.ShowForce(CalculateForce(holdDownMouseTime));
         }
 
     }
 
-    ///// ~ fancy ~  METHODS /////
     public bool IsMouseInGame(Vector2 screenMousePos)
     {
         float x = screenMousePos.x;
@@ -139,12 +139,10 @@ public class BallController : MonoBehaviour
 
     public float CalculateForce(float time)
     {
-        float result = (Mathf.Sin(time) + 1) * force;
-        return result;
-    }
-
-    public void ShowForce(float time)   // not yet implemented
-    {
+        // If you doubt this equation, try it out in a graphing calculator:
+        float theta = (time - 1.6f);                        // theta shifted horizontally to the right
+        float thisForce = (Mathf.Sin(theta) + 1f) / 2f;      // this sin equation is [0 to 1]
+        return thisForce;
     }
 
     public void HitByClub(Vector2 angle, float thisForce)
@@ -152,7 +150,7 @@ public class BallController : MonoBehaviour
         EOnBallHit?.Invoke();
         StartCoroutine(_canHitBallCoroutine()); 
 
-        rb2d.AddForce(angle * thisForce * 10f);   
+        rb2d.AddForce(angle * thisForce * force * force);   
         _levelStatManager?.AddStroke();
         _audioManagerScript.PlayHitSound();
     }
