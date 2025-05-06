@@ -44,6 +44,7 @@ public class PlayerMovementController : MonoBehaviour
             
             if(Vector2.Distance(current, target) < 1f)
             {
+                _ballController?.TrueCanHitBall();
                 yield break;
             }
 
