@@ -8,7 +8,6 @@ public class BallController : MonoBehaviour
     ///// PUBLIC VARIABLES /////
     [Tooltip("The force applied to the ball when hit.")]
     public float force = 30f;  
-    [Tooltip("The height of the menu bar in pixels.")]
     
     ///// PRIVATE VARIABLES /////
     private Rigidbody2D rb2d;
@@ -101,7 +100,6 @@ public class BallController : MonoBehaviour
 
         if(Input.GetMouseButton(0))                 // true while holding down
         {
-            // Debug.Log("Mouse held down");
             holdDownMouseTime = Time.time - startHoldMouseTime;
             _powerBarControllerScript?.ShowForce(CalculateForce(holdDownMouseTime));
         }
@@ -113,17 +111,14 @@ public class BallController : MonoBehaviour
         float x = screenMousePos.x;
         float y = screenMousePos.y;
         float screenHeight = Screen.height;
-        // Debug.Log("Screen height: " + screenHeight);
 
         if (x < 0 || x > Screen.width || y < 0 || y > screenHeight)
         {
-            // Debug.Log("Mouse position out of bounds");
             return false;
         }
 
         // Since (0,0) is bottom-left, and menu bar is at top:
         float maxInGameHeight = screenHeight - _levelStatManager._levelStatUIHeight;
-        // Debug.Log("Max click height: " + maxInGameHeight);
         return y <= maxInGameHeight;
     }
 
@@ -139,9 +134,8 @@ public class BallController : MonoBehaviour
 
     public float CalculateForce(float time)
     {
-        // If you doubt this equation, try it out in a graphing calculator:
-        float theta = (time - 1.6f);                        // theta shifted horizontally to the right
-        float thisForce = (Mathf.Sin(theta) + 1f) / 2f;      // this sin equation is [0 to 1]
+        float theta = (time - 1.6f);                        // theta shifted horizontally
+        float thisForce = (Mathf.Sin(theta) + 1f) / 2f;      // sin equation on [0, 1]
         return thisForce;
     }
 

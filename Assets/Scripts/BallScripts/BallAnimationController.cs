@@ -5,7 +5,7 @@ public class BallAnimationController : MonoBehaviour
     ///// PRIVATE VARIABLES /////
     private Animator _ballAnimator;
 
-    ///// METHODS /////
+    ///// GIVEN METHODS /////
     void Start()
     {
         _ballAnimator = GetComponent<Animator>();
@@ -16,10 +16,6 @@ public class BallAnimationController : MonoBehaviour
         BallEnvironmentInteractionScript.EOnBallInHole += TriggerInHole;
     }
 
-    void Update()
-    {
-    }
-
     void OnDestroy()
     {
         BallController.EOnBallHit -= TriggerHit;
@@ -28,21 +24,19 @@ public class BallAnimationController : MonoBehaviour
         BallEnvironmentInteractionScript.EOnBallInHole -= TriggerInHole;
     }
 
+    ///// ANIMATION TRIGGERS /////
     private void TriggerHit()
     {
         _ballAnimator.SetTrigger("BallHitTrigger");
-        // Debug.Log("Ball hit triggered!");
     }
 
     private void TriggerStop()
     {
         _ballAnimator.SetTrigger("BallStopTrigger");
-        // Debug.Log("Ball stop triggered!");
     }
 
     private void TriggerInHole()
     {
         _ballAnimator.SetTrigger("BallInHoleTrigger");
-        // Debug.Log("Ball in hole triggered!");
     }
 }

@@ -25,25 +25,20 @@ public class BallEnvironmentInteractionScript : MonoBehaviour
         _audioManagerScript = FindFirstObjectByType<AudioManagerScript>();
     }
 
-    void Update()
-    {
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Hole"))
         {
-            // Debug.Log("Ball in hole!");
             OnHitHole();
         }
+
         if (other.CompareTag("Sand"))
         {
-            // Debug.Log("Ball in sand!");
             OnHitSand();
         }
+
         if (other.CompareTag("Water"))
         {
-            // Debug.Log("Ball in water!");
             OnHitWater();
         }
     }
@@ -52,7 +47,6 @@ public class BallEnvironmentInteractionScript : MonoBehaviour
     {
         if (other.CompareTag("Sand"))
         {
-            // Debug.Log("Ball out of sand!");
             OnExitSand();
         }
     }
@@ -61,8 +55,6 @@ public class BallEnvironmentInteractionScript : MonoBehaviour
     {        
         if (collision.collider.CompareTag("Wall"))
         {
-            // ContactPoint2D contact = collision.contacts[0];
-            // Debug.Log("Hit wall at: " + contact.point);
             OnHitWall();
         }
     }
@@ -90,9 +82,6 @@ public class BallEnvironmentInteractionScript : MonoBehaviour
         EOnBallInHole?.Invoke();
         _levelStatManager?.cueNextLevel();
         _audioManagerScript?.PlayHoleSound();
-
-        // cue level complete popup !
-
     }
 
     public void OnHitSand()
