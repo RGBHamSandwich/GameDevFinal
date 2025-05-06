@@ -669,7 +669,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfLevels: 6
   strokes: 0
-  strokesToBeat: 25
+  strokesToBeat: 20
   level: 0
   _levelStatUIHeight: 50
   resetLowScore: 0

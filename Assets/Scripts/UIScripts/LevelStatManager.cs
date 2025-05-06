@@ -40,7 +40,8 @@ public class LevelStatManager : MonoBehaviour
 
         if(!resetLowScore)
         {
-            strokesToBeat = PlayerPrefs.GetInt("strokesToBeat", 30);
+            PlayerPrefs.SetInt("strokesToBeat", 25);
+            strokesToBeat = PlayerPrefs.GetInt("strokesToBeat");
         }
         else
         {
