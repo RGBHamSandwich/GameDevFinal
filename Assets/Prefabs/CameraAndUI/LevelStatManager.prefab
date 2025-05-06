@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8258473997506173418}
   - component: {fileID: 4003425675811520000}
   m_Layer: 5
-  m_Name: Canvas
-  m_TagString: Untagged
+  m_Name: LevelUI
+  m_TagString: LevelUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 3994276658661401365}
   - component: {fileID: 1349637926696138441}
   m_Layer: 5
-  m_Name: ExitButton
+  m_Name: ExitGameButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,9 +227,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 755182091669924444}
         m_TargetAssemblyTypeName: MenuUIManagerScript, Assembly-CSharp
-        m_MethodName: ExitButton
+        m_MethodName: ExitGameButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -375,6 +375,55 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &3559446810972883876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4401824925201172296}
+  - component: {fileID: 755182091669924444}
+  m_Layer: 5
+  m_Name: LevelUIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4401824925201172296
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3559446810972883876}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.2094101, y: 1.2094101, z: 1.2094101}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 708877942765094615}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 483.76404, y: 271.96817}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &755182091669924444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3559446810972883876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 212d6f4ccaac9f54797c39c01a19beb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settingsMenu: {fileID: 8081820112518871616, guid: f6e374ff89e1e974e92aaacee6ea4456, type: 3}
 --- !u!1 &5091376600726789565
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,6 +530,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 870623428208830326}
+  - {fileID: 4401824925201172296}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-2772430490017233084
@@ -497,7 +547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfLevels: 4
   strokes: 0
-  strokesToBeat: 10
+  strokesToBeat: 30
   level: 0
   _levelStatUIHeight: 50
   resetLowScore: 1
@@ -893,9 +943,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 755182091669924444}
         m_TargetAssemblyTypeName: MenuUIManagerScript, Assembly-CSharp
-        m_MethodName: ExitButton
+        m_MethodName: SettingsButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

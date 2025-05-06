@@ -5,14 +5,14 @@ public class TitleUIManagerScript : MonoBehaviour
     ///// PRIVATE VARIABLES /////
     private LevelStatManager _levelStatManager;
     private AudioManagerScript _audioManagerScript;
-    private MenuUIManagerScript _menuUIManagerScript;
+    private LevelUIManagerScript _menuUIManagerScript;
 
     ///// GIVEN METHODS /////
     void Start()
     {
         _levelStatManager = FindFirstObjectByType<LevelStatManager>();
         _audioManagerScript = FindFirstObjectByType<AudioManagerScript>();
-        _menuUIManagerScript = FindFirstObjectByType<MenuUIManagerScript>();
+        _menuUIManagerScript = FindFirstObjectByType<LevelUIManagerScript>();
     }
 
     void Update()

@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Wall
+  - Ball
+  - Water
+  - Sand
+  - Hole
+  - TitleScreenUI
+  - SettingsUI
+  - LevelUI
+  - ENVIRONMENT
+  - GAMEPLAY
   layers:
   - Default
   - TransparentFX

@@ -104,6 +104,13 @@ public class AudioManagerScript : MonoBehaviour
         Debug.Log("Music volume toggled!");
     }
 
+    public void UpdateMusicVolume(float volume)
+    {
+        musicVolume = volume;
+        musicSource.volume = musicVolume;
+        Debug.Log("Music volume updated to: " + musicVolume.ToString());
+    }
+
     public void ToggleSFXVolumeOff()
     {
         sfxMuted = true;
@@ -114,6 +121,13 @@ public class AudioManagerScript : MonoBehaviour
     {
         sfxMuted = false;
         Debug.Log("SFX volume toggled!");
+    }
+
+    public void UpdateSFXVolume(float volume)
+    {
+        sfxVolume = volume;
+        sfxSource.volume = sfxVolume;
+        Debug.Log("SFX volume updated to: " + sfxVolume.ToString());
     }
 
     ////// GAMEPLAY SOUNDS //////

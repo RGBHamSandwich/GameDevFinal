@@ -212,50 +212,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 764942087924494760, guid: 683bbb69509fac94eb15c385a4590be9, type: 3}
   m_PrefabInstance: {fileID: 1781938442}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &88199217
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 88199218}
-  - component: {fileID: 88199219}
-  m_Layer: 0
-  m_Name: MenuUIManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &88199218
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 88199217}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 126592578}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &88199219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 88199217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 212d6f4ccaac9f54797c39c01a19beb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &91204139
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,7 +223,7 @@ GameObject:
   - component: {fileID: 91204140}
   m_Layer: 0
   m_Name: ENVIRONMENT
-  m_TagString: Untagged
+  m_TagString: ENVIRONMENT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -391,7 +347,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 595391100}
-  - {fileID: 88199218}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &235186018
@@ -14836,7 +14791,7 @@ GameObject:
   - component: {fileID: 2117039459}
   m_Layer: 0
   m_Name: GAMEPLAY
-  m_TagString: Untagged
+  m_TagString: GAMEPLAY
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
