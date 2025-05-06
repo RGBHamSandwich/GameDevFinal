@@ -19,6 +19,8 @@ public class PlayerMovementController : MonoBehaviour
     public static event PlayerIdle EOnPlayerIdle;
     public delegate void OnPlayerCry();
     public static event OnPlayerCry EOnPlayerCry;
+    public delegate void PlayerWalk();
+    public static event PlayerWalk EOnPlayerWalk;
 
     ///// GIVEN METHODS /////
     void Start()
@@ -39,6 +41,13 @@ public class PlayerMovementController : MonoBehaviour
         {
             Vector2 target = _ballTransform.position;
             Vector2 current = _playerTransform.position;
+            
+            if(Vector2.Distance(current, target) < 1f)
+            {
+                yield break;
+            }
+
+            EOnPlayerWalk?.Invoke();
 
             while (Vector2.Distance(current, target) > 0.5f)
             {

@@ -12,19 +12,19 @@ public class PlayerAnimationController : MonoBehaviour
         _playerAnimator = GetComponent<Animator>();
 
         BallController.EOnPlayerSwing += TriggerSwing;
-        BallController.EOnBallStop += TriggerWalk;
         PlayerMovementController.EOnPlayerIdle += TriggerIdle;
         LevelStatManager.EOnPlayerCry += TriggerCry;
         PlayerMovementController.EOnPlayerCry += TriggerCry;
+        PlayerMovementController.EOnPlayerWalk += TriggerWalk;
     }
 
     void OnDestroy()
     {
         BallController.EOnPlayerSwing -= TriggerSwing;
-        BallController.EOnBallStop -= TriggerWalk;
         PlayerMovementController.EOnPlayerIdle -= TriggerIdle;
         LevelStatManager.EOnPlayerCry -= TriggerCry;
         PlayerMovementController.EOnPlayerCry -= TriggerCry;
+        PlayerMovementController.EOnPlayerWalk -= TriggerWalk;
     }
 
     void Update()
