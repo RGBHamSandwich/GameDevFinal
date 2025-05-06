@@ -7,6 +7,8 @@ public class SettingsUIManagerScript : MonoBehaviour
     [Header("Settings Auto-Assigned Values")]
     public GameObject ENVIRONMENT;
     public GameObject GAMEPLAY;
+    public GameObject titleScreenUI;
+    public GameObject levelUI;
     [Header("Menu Buttons")]
     public Toggle musicToggle;
     public Slider musicSlider;
@@ -29,50 +31,46 @@ public class SettingsUIManagerScript : MonoBehaviour
 
     public void SettingsCloseButton()
     {
-        Debug.Log("Settings Close Button Pressed");
+        RevealAllVisuals();
+        _ballControllerScript = FindFirstObjectByType<BallController>();
+        _ballControllerScript?.TrueCanHitBall();
         _audioManagerScript?.PlayClickOutSound();   
-        
+        Destroy(transform.root.gameObject);
+    }
+
+    public void RevealAllVisuals()
+    {
         if (_levelStatManager.level <= 0)
         {
-            GameObject titleScreenUI = GameObject.FindGameObjectWithTag("TitleScreenUI");
             Canvas titleScreenCanvas = titleScreenUI.GetComponent<Canvas>();
             titleScreenCanvas.enabled = true;
         }
 
-        GameObject levelUI = GameObject.FindGameObjectWithTag("LevelUI");
         Canvas levelUICanvas = levelUI.GetComponent<Canvas>();
         levelUICanvas.enabled = true;
 
         ENVIRONMENT.SetActive(true);
-
         GAMEPLAY.SetActive(true);
-        _ballControllerScript = FindFirstObjectByType<BallController>();
-        _ballControllerScript?.TrueCanHitBall();
-
-        Destroy(transform.root.gameObject);
     }
 
     ///// EXIT BUTTONS /////
     public void ExitGameButton()
     {
-        Debug.Log("Exit Button Pressed");
         _audioManagerScript?.PlayClickInSound();
-
-        Debug.Log("Level: " + _levelStatManager.level.ToString());
-        // _ballControllerScript?.FalseCanHitBall();
+        _ballControllerScript?.FalseCanHitBall();
         //prompt an "Are You Sure?" popup?
     }
 
     public void ExitYesButton()
     {
-        Debug.Log("Exit Yes Button Pressed");
         Application.Quit();
-        // sound?
+        Debug.Log("Application.Quit() called; this will only work in a built game.");               // necessary debug log
     }
 
     public void ExitNoButton()
     {
-        Debug.Log("Exit No Button Pressed");
+        _audioManagerScript?.PlayClickInSound();
+        _ballControllerScript?.TrueCanHitBall();
         // close the "Are you sure?" popup
         _audioManagerScript?.PlayClickOutSound();
     }
@@ -80,8 +78,6 @@ public class SettingsUIManagerScript : MonoBehaviour
     ///// SOUND BUTTONS /////
     public void MusicButton()
     {
-        Debug.Log("Music Off Button Pressed");
-        Debug.Log("isOn: " + musicToggle.isOn.ToString());
         _audioManagerScript?.PlayClickInSound();
 
         if (musicToggle.isOn)
@@ -96,16 +92,12 @@ public class SettingsUIManagerScript : MonoBehaviour
 
     public void MusicSlider()
     {
-        Debug.Log("Music Slider Pressed");
-        Debug.Log("Volume: " + musicSlider.value.ToString());
         _audioManagerScript?.PlayClickInSound();
         _audioManagerScript?.UpdateMusicVolume(1 - musicSlider.value);
     }
 
     public void SFXButton()
     {
-        Debug.Log("SFX Button Pressed");
-        Debug.Log("isOn: " + sfxToggle.isOn.ToString());
         _audioManagerScript?.PlayClickInSound();
 
         if (sfxToggle.isOn)
@@ -120,8 +112,6 @@ public class SettingsUIManagerScript : MonoBehaviour
 
     public void SFXSlider()
     {
-        Debug.Log("SFX Slider Pressed");
-        Debug.Log("Volume: " + sfxSlider.value.ToString());
         _audioManagerScript?.PlayClickInSound();
         _audioManagerScript?.UpdateSFXVolume(1 - sfxSlider.value);
     }

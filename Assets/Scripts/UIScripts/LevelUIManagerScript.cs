@@ -5,7 +5,12 @@ public class LevelUIManagerScript : MonoBehaviour
 {
     ///// PUBLIC VARIABLES /////
     public GameObject settingsMenu;
+    public GameObject exitMenu;
     ///// PRIVATE VARIABLES /////
+    private GameObject levelEnvironment;
+    private GameObject levelGameplay;
+    private GameObject titleScreenUI;
+    private GameObject levelUI;
     private LevelStatManager _levelStatManager;
     private AudioManagerScript _audioManagerScript;
     private BallController _ballControllerScript;
@@ -26,25 +31,16 @@ public class LevelUIManagerScript : MonoBehaviour
     ///// MENU BUTTONS /////
     public void ExitGameButton()
     {
-        Debug.Log("Exit Button Pressed");
+        Debug.Log("Exit Game Button Pressed");
         _audioManagerScript?.PlayClickInSound();
-
-        if(_levelStatManager.level <= 0)    // if we're on the title screen
-        {
-            // exit the game
-            Application.Quit();
-            Debug.Log("Application.Quit() called from Title Screen");
-            return;
-        }
-        Debug.Log("Level: " + _levelStatManager.level.ToString());
         _ballControllerScript?.FalseCanHitBall();
-        //prompt an "Are You Sure?" popup?
+        Instantiate(exitMenu, transform.position, Quaternion.identity);
     }
 
     public void ExitYesButton()
     {
-        Debug.Log("Exit Yes Button Pressed");
         Application.Quit();
+        Debug.Log("Application.Quit() called; this will only work in a built game.");               // necessary debug log
         // sound?
     }
 
@@ -57,27 +53,6 @@ public class LevelUIManagerScript : MonoBehaviour
 
     public void SettingsButton()
     {
-        Debug.Log("Settings Button Pressed");
-        _audioManagerScript?.PlayClickInSound();
-        _ballControllerScript?.FalseCanHitBall();
-        
-        if (_levelStatManager.level <= 0)
-        { 
-            GameObject titleScreenUI = GameObject.FindGameObjectWithTag("TitleScreenUI");
-            Canvas titleScreenCanvas = titleScreenUI.GetComponent<Canvas>();
-            titleScreenCanvas.enabled = false;
-        }
-
-        GameObject levelUI = GameObject.FindGameObjectWithTag("LevelUI");
-        Canvas levelUICanvas = levelUI.GetComponent<Canvas>();
-        levelUICanvas.enabled = false; 
-
-        GameObject levelEnvironment = GameObject.FindGameObjectWithTag("ENVIRONMENT");
-        levelEnvironment.SetActive(false);
-
-        GameObject levelGameplay = GameObject.FindGameObjectWithTag("GAMEPLAY");
-        levelGameplay.SetActive(false);
-
         if(GameObject.FindGameObjectWithTag("SettingsUI") != null)
         {
             Debug.Log("Settings Menu already exists, closing it.");
@@ -85,11 +60,43 @@ public class LevelUIManagerScript : MonoBehaviour
             return;
         }
 
+        Debug.Log("Settings Button Pressed");
+        _audioManagerScript?.PlayClickInSound();
+        _ballControllerScript?.FalseCanHitBall();
+        HideAllVisuals();       // initializes values for levelEnvironment, levelGameplay, titleScreenUI, and levelUI
+        InitalizeSettingsMenu();    // gives them to the settings menu
+    }
+
+    public void HideAllVisuals()
+    {
+        if (_levelStatManager.level <= 0)
+        { 
+            titleScreenUI = GameObject.FindGameObjectWithTag("TitleScreenUI");
+            Canvas titleScreenCanvas = titleScreenUI.GetComponent<Canvas>();
+            titleScreenCanvas.enabled = false;
+        }
+
+        levelUI = GameObject.FindGameObjectWithTag("LevelUI");
+        Canvas levelUICanvas = levelUI.GetComponent<Canvas>();
+        levelUICanvas.enabled = false; 
+
+        
+        levelEnvironment = GameObject.FindGameObjectWithTag("ENVIRONMENT");
+        levelEnvironment.SetActive(false);
+
+        levelGameplay = GameObject.FindGameObjectWithTag("GAMEPLAY");
+        levelGameplay.SetActive(false);
+    }
+
+    public void InitalizeSettingsMenu()
+    {
         Instantiate(settingsMenu, transform.position, Quaternion.identity);
         _settingsUIManagerScript = FindFirstObjectByType<SettingsUIManagerScript>();
         _settingsUIManagerScript.ENVIRONMENT = levelEnvironment;
         _settingsUIManagerScript.GAMEPLAY = levelGameplay;
+        _settingsUIManagerScript.titleScreenUI = titleScreenUI;
+        _settingsUIManagerScript.levelUI = levelUI;
         Debug.Log("Settings Menu Opened");
-
     }
+
 }

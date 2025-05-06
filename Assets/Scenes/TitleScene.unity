@@ -643,6 +643,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5446214648072211026, guid: cb86a77726b513a4dacad654b4188daa, type: 3}
+      propertyPath: m_text
+      value: 'To Beat: 30'
+      objectReference: {fileID: 0}
     - target: {fileID: 6663861282928420438, guid: cb86a77726b513a4dacad654b4188daa, type: 3}
       propertyPath: m_Name
       value: LevelStatManager
