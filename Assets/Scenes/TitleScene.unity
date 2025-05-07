@@ -405,53 +405,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3535352592286390049, guid: 715424a77c649b045929b3922d87e851, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 84758821}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 715424a77c649b045929b3922d87e851, type: 3}
---- !u!1 &84758820 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3535352592286390049, guid: 715424a77c649b045929b3922d87e851, type: 3}
-  m_PrefabInstance: {fileID: 84758819}
-  m_PrefabAsset: {fileID: 0}
---- !u!70 &84758821
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 84758820}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.8, y: 0.9}
-  m_Direction: 0
 --- !u!4 &84758822 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6744124787515782177, guid: 715424a77c649b045929b3922d87e851, type: 3}
@@ -4469,7 +4424,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 654, y: -58}
+  m_AnchoredPosition: {x: 546, y: -65}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &423165995
@@ -4492,7 +4447,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: click to aim!
+  m_text: click and hold to swing
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 641397d4119a42f4da8b236ecc50ccd7, type: 2}
   m_sharedMaterial: {fileID: -14386304816164214, guid: 641397d4119a42f4da8b236ecc50ccd7, type: 2}

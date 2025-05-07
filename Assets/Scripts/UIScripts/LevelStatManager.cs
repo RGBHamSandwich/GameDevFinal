@@ -36,19 +36,21 @@ public class LevelStatManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
 
-        if(!resetLowScore)
+        if (resetLowScore)
         {
-            PlayerPrefs.SetInt("strokesToBeat", 25);
-            strokesToBeat = PlayerPrefs.GetInt("strokesToBeat");
+            PlayerPrefs.SetInt("strokesToBeat", strokesToBeat);  // overwrite with current field value
+            PlayerPrefs.Save();
         }
         else
         {
-            PlayerPrefs.SetInt("strokesToBeat", strokesToBeat);
-            PlayerPrefs.Save();
+            // Load saved value, or default to 30 if none exists
+            strokesToBeat = PlayerPrefs.GetInt("strokesToBeat", 30);
         }
     }
+
 
     void Start()
     {
@@ -143,13 +145,13 @@ public class LevelStatManager : MonoBehaviour
     
     public void cueVictoryScene()
     {
-        _audioManagerScript?.PlayTitleMusic();                          // victory music?
+        _audioManagerScript?.PlayTitleMusic();
         StartCoroutine(NextLevelCoroutine("Victory"));
     }
 
     public void cueDefeatScene()
     {
-        _audioManagerScript?.PlayTitleMusic();                         // defeat music?  
+        _audioManagerScript?.PlayTitleMusic();
         StartCoroutine(NextLevelCoroutine("Defeat"));
     }
 

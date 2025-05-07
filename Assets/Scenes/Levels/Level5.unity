@@ -808,7 +808,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -2653,10 +2653,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Water
       objectReference: {fileID: 0}
-    - target: {fileID: 172625647438802478, guid: 15ddd93419efe9a4b9fb88d773c01741, type: 3}
-      propertyPath: m_TagString
-      value: Water
-      objectReference: {fileID: 0}
     - target: {fileID: 6000592821844218172, guid: 15ddd93419efe9a4b9fb88d773c01741, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.size
       value: 17
@@ -2868,11 +2864,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6744124787515782177, guid: 715424a77c649b045929b3922d87e851, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.6299562
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6744124787515782177, guid: 715424a77c649b045929b3922d87e851, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.33026773
+      value: -2.79
       objectReference: {fileID: 0}
     - target: {fileID: 6744124787515782177, guid: 715424a77c649b045929b3922d87e851, type: 3}
       propertyPath: m_LocalPosition.z

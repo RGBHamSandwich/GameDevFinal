@@ -173,7 +173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5319024611820368226, guid: bbb4d665a4969e44eb18defa7b9d99e7, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5319024611820368226, guid: bbb4d665a4969e44eb18defa7b9d99e7, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.size
@@ -810,11 +810,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6744124787515782177, guid: 715424a77c649b045929b3922d87e851, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.0626419
+      value: 0.24
       objectReference: {fileID: 0}
     - target: {fileID: 6744124787515782177, guid: 715424a77c649b045929b3922d87e851, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.085481
+      value: -1.08
       objectReference: {fileID: 0}
     - target: {fileID: 6744124787515782177, guid: 715424a77c649b045929b3922d87e851, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1248,7 +1248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5319024611820368226, guid: bbb4d665a4969e44eb18defa7b9d99e7, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5319024611820368226, guid: bbb4d665a4969e44eb18defa7b9d99e7, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.size

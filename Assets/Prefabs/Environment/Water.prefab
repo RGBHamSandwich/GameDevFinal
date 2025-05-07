@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6000592821844218172}
   m_Layer: 0
   m_Name: Water
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,9 +78,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 1}
-      - {x: -0.95105654, y: 0.30901697}
-      - {x: -0.5877852, y: -0.80901706}
-      - {x: 0.58778536, y: -0.80901694}
+    - - {x: -0.6535206, y: 4.454321}
+      - {x: -5.7412815, y: 4.999627}
+      - {x: -5.759097, y: -9.773867}
+      - {x: -0.91454643, y: -9.258099}
+      - {x: 1.0079056, y: -5.243618}
       - {x: 0.9510565, y: 0.30901712}
   m_UseDelaunayMesh: 0
